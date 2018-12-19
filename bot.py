@@ -178,6 +178,18 @@ async def unmute(ctx, user: discord.Member):
          role = discord.utils.get(server.roles, name="Muted")
          await ctx.send(str(user.name)+" has been unmuted")
          await user.remove_roles(role)
+            
+            
+@client.command(pass_content=True)   
+async def roleall(ctx, left: str):
+        if ctx.message.author.guild_permissions.ban_members:
+         server = ctx.message.guild
+         role = discord.utils.get(server.roles, name=left)
+         await ctx.send("I'm gonna start giving everyone the "+left+" role and i'll notify you when i'm done :gear:")
+         x = server.members
+         for member in x:
+            await member.add_roles(role)
+         await ctx.send(""+str(ctx.message.author.mention)+" I've roled everyone :+1:")
         
         
 @client.command(pass_content=True)
