@@ -159,6 +159,7 @@ async def ban(ctx, user: discord.Member):
 @client.command(pass_content=True)   
 async def mute(ctx, user: discord.Member):
         if ctx.message.author.guild_permissions.kick_members:
+         server = ctx.message.guild
          role = discord.utils.get(server.roles, name="Muted")
          await ctx.send(str(user.name)+" has been muted")
          await user.add_roles(role)
@@ -167,6 +168,7 @@ async def mute(ctx, user: discord.Member):
 @client.command(pass_content=True)   
 async def unmute(ctx, user: discord.Member):
         if ctx.message.author.guild_permissions.kick_members:
+         server = ctx.message.guild
          role = discord.utils.get(server.roles, name="Muted")
          await ctx.send(str(user.name)+" has been unmuted")
          await user.remove_roles(role)
