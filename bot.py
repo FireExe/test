@@ -165,7 +165,7 @@ async def mute(ctx, user: discord.Member):
         
         
 @client.command(pass_content=True)   
-async def mute(ctx, user: discord.Member):
+async def unmute(ctx, user: discord.Member):
         if ctx.message.author.guild_permissions.kick_members:
          role = discord.utils.get(server.roles, name="Muted")
          await ctx.send(str(user.name)+" has been unmuted")
