@@ -118,6 +118,9 @@ async def assign(ctx, left: str):
         elif left  == "QOTDping":
           await ctx.send("You will now receive QOTD pings " + str( user.name))
           await user.add_roles(role)
+        elif left  == "Sneakpeakping":
+          await ctx.send("You will now receive sneak peak pings " + str( user.name))
+          await user.add_roles(role)
             
      
 @client.command(pass_content=True)
@@ -131,7 +134,9 @@ async def unassign(ctx, left: str):
         elif left  == "QOTDping":
           await ctx.send("You will no longer receive QOTD pings " + str( user.name))
           await user.remove_roles(role)
-      
+        elif left  == "Sneakpeakping":
+          await ctx.send("You will no longer sneak peak pings " + str( user.name))
+          await user.remove_roles(role)
     
 @client.command(name="kick",
                 description="'Kick a member'    'Usage:/kick[member]'     'Example:/kick dJnokia'",
