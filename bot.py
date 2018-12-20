@@ -75,7 +75,7 @@ async def roasts(ctx):
     ]
     await ctx.send(random.choice(choices))
    else:
-    channel = discord.utils.get(server.channels, name="roasts")
+    channel = discord.utils.get(ctx.message.guild.channels, name="roasts")
     await ctx.send("I only do roasts in "+str(channel.mention))
 
     
