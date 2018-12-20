@@ -45,6 +45,7 @@ async def on_ready():
 # below this line you can put custom Functions
 @client.command()
 async def roasts(ctx):
+   if ctx.message.channel.name == "roasts":
     choices = [
      "You should eat some of that make up, to be pretty on the inside",
      "Can you stop making that disgusting sound, oh wait... it's your voice",
@@ -73,6 +74,9 @@ async def roasts(ctx):
      "Nooooob"
     ]
     await ctx.send(random.choice(choices))
+   else:
+    channel = discord.utils.get(server.channels, name="roasts")
+    await ctx.send("I only do roasts in "+str(channel.mention))
 
     
 @client.command()
@@ -112,7 +116,7 @@ async def assign(ctx, left: str):
        user = ctx.message.author
        server = ctx.message.guild
        role = discord.utils.get(server.roles, name=left)
-       if ctx.message.channel.name != "general": 
+       if ctx.message.channel.name != "general" and ctx.message.channel.name != "qotd-answers" and ctx.message.channel.name != "roasts" and ctx.message.channel.name != "memes": 
         if left  == "Nopartnerpings":
           await ctx.send("You will no longer receive partner pings " + str( user.name))
           await user.add_roles(role)
@@ -126,9 +130,10 @@ async def assign(ctx, left: str):
      
 @client.command(pass_content=True)
 async def unassign(ctx, left: str):
-        user = ctx.message.author
-        server = ctx.message.guild
-        role = discord.utils.get(server.roles, name=left)
+       user = ctx.message.author
+       server = ctx.message.guild
+       role = discord.utils.get(server.roles, name=left)
+       if ctx.message.channel.name != "general" and ctx.message.channel.name != "qotd-answers" and ctx.message.channel.name != "roasts" and ctx.message.channel.name != "memes":
         if left  == "Nopartnerpings":
           await ctx.send("You will now recieve partner pings " + str( user.name))
           await user.remove_roles(role)
