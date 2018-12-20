@@ -109,9 +109,10 @@ async def square(ctx, num : int):
     
 @client.command(pass_content=True)
 async def assign(ctx, left: str):
-        user = ctx.message.author
-        server = ctx.message.guild
-        role = discord.utils.get(server.roles, name=left)
+       user = ctx.message.author
+       server = ctx.message.guild
+       role = discord.utils.get(server.roles, name=left)
+       if ctx.message.channel.name != "general": 
         if left  == "Nopartnerpings":
           await ctx.send("You will no longer receive partner pings " + str( user.name))
           await user.add_roles(role)
