@@ -242,12 +242,13 @@ async def donate(ctx, amount : str = None):
  )
  num = 0
  if amount:
-  embed.set_author(name=" ")
-  embed.add_field(name="Users: ", value=" Here's a test for if donations work",inline=False)
-  await ctx.message.author.send(" ", embed=embed)
+  if amount > 0 and amount < 50: 
+   embed.set_author(name=" ")
+   embed.add_field(name="Small donations ", value="https://www.roblox.com/catalog/2693095047/Small-Donations",inline=False)
+   await ctx.message.author.send(" ", embed=embed)
  else:
   embed.set_author(name=" ")
-  embed.add_field(name=":x: Incorrect usage: ", value="Correct usage- /donate [amount]",inline=False)
+  embed.add_field(name=":x: Incorrect usage: ", value="/donate [amount]",inline=False)
   await ctx.send(" ", embed=embed)
     
     
