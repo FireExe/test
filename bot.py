@@ -242,30 +242,39 @@ async def donate(ctx, amount : int = None):
  )
  num = 0
  if amount:
-  if  amount > 1000: 
+  if  amount > 999: 
    embed.set_author(name=" ")
    embed.add_field(name="Large donations ", value="https://www.roblox.com/catalog/2693098576/Large-Donations",inline=False)
    await ctx.message.author.send(" ", embed=embed)
-  elif amount > 500: 
+  elif amount > 499: 
    embed.set_author(name=" ")
    embed.add_field(name="Medium donations ", value="https://www.roblox.com/catalog/2693097087/Medium-Donations",inline=False)
    await ctx.message.author.send(" ", embed=embed)
-  elif amount > 100: 
+  elif amount > 99: 
    embed.set_author(name=" ")
    embed.add_field(name="Small donations ", value="https://www.roblox.com/catalog/2693095047/Small-Donations",inline=False)
    await ctx.message.author.send(" ", embed=embed)
-  elif amount > 50:
+  elif amount > 49:
    embed.set_author(name=" ")
    embed.add_field(name="Micro donations ", value="https://www.roblox.com/catalog/2693093169/Micro-Donation",inline=False)
+   await ctx.message.author.send(" ", embed=embed)
   else:
    embed.set_author(name=" ")
    embed.add_field(name=":x: Sorry", value="That donation is to small, 50 is the minimum",inline=False)
+   await ctx.message.author.send(" ", embed=embed)
  else:
   embed.set_author(name=" ")
   embed.add_field(name=":x: Incorrect usage: ", value="/donate [amount]",inline=False)
   await ctx.send(" ", embed=embed)
     
-    
+@client.command(pass_content=True)
+async def group(ctx, amount : int = None):
+ embed = discord.Embed(
+        colour = discord.Colour.orange()
+ )
+   embed.set_author(name=" ")
+   embed.add_field(name="Group", value="https://www.roblox.com/My/Groups.aspx?gid=4622364",inline=False)
+   await ctx.message.author.send(" ", embed=embed)
         
 @client.event
 async def on_member_join(member):
