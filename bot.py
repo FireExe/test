@@ -244,11 +244,11 @@ async def donate(ctx, amount : str = None):
  if amount:
   embed.set_author(name=" ")
   embed.add_field(name="Users: ", value=" Here's a test for if donations work",inline=False)
-  await ctx.send_message(ctx.message.author," ", embed=embed)
+  await ctx.message.author.send(" ", embed=embed)
  else:
   embed.set_author(name=" ")
-  embed.add_field(name=":x: Incorrect usage: ", value="Correct usage- !donate [amount]",inline=False)
-  await ctx.send_message(" ", embed=embed)
+  embed.add_field(name=":x: Incorrect usage: ", value="Correct usage- /donate [amount]",inline=False)
+  await ctx.send(" ", embed=embed)
     
     
         
