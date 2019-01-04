@@ -236,13 +236,21 @@ async def membercount(ctx):
 
     
 @client.command(pass_content=True)
-async def donate(ctx, amount : str = None):
+async def donate(ctx, amount : int = None):
  embed = discord.Embed(
         colour = discord.Colour.orange()
  )
  num = 0
  if amount:
-  if amount > 0 and amount < 50: 
+  if  amount > 0 and amount < 50: 
+   embed.set_author(name=" ")
+   embed.add_field(name=":x: Sorry", value="That donation is to small, 50 is the minimum",inline=False)
+   await ctx.message.author.send(" ", embed=embed)
+  elif amount > 50 and amount < 100: 
+   embed.set_author(name=" ")
+   embed.add_field(name="Micro donations ", value="https://www.roblox.com/catalog/2693093169/Micro-Donation",inline=False)
+   await ctx.message.author.send(" ", embed=embed)
+  elif amount > 100 and amount < 500: 
    embed.set_author(name=" ")
    embed.add_field(name="Small donations ", value="https://www.roblox.com/catalog/2693095047/Small-Donations",inline=False)
    await ctx.message.author.send(" ", embed=embed)
