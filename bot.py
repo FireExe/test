@@ -267,7 +267,7 @@ async def donate(ctx, amount : int = None):
   embed.add_field(name=":x: Incorrect usage: ", value="/donate [amount]",inline=False)
   await ctx.send(" ", embed=embed)
     
-    @client.command(pass_content=True)
+@client.command(pass_content=True)
 async def winner(ctx, item : str , user : discord.Member):
  embed = discord.Embed(
         colour = discord.Colour.orange()
