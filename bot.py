@@ -267,6 +267,19 @@ async def donate(ctx, amount : int = None):
   embed.add_field(name=":x: Incorrect usage: ", value="/donate [amount]",inline=False)
   await ctx.send(" ", embed=embed)
     
+    @client.command(pass_content=True)
+async def winner(ctx, item : str , user : discord.Member):
+ embed = discord.Embed(
+        colour = discord.Colour.orange()
+ )
+ server = discord.utils.get(client.guilds, name='Bot making')
+ channel = discord.utils.get(server.channels, name="weapon-winner-log")  
+ embed.set_author(name=" ")
+ embed.add_field(name="Added", value= str(user)+" has been added to the list of winners and their item won is the"+item,inline=False)
+ await ctx.message.author.send(" ", embed=embed)
+ await channel.send(" ", embed=embed)
+   
+    
 @client.command(pass_content=True)
 async def group(ctx, amount : int = None):
  embed = discord.Embed(
