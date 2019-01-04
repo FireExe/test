@@ -232,6 +232,24 @@ async def membercount(ctx):
  embed.set_author(name=" ")
  embed.add_field(name="Users: ", value=num,inline=False)
  await ctx.send(" ", embed=embed)
+
+
+    
+@client.command(pass_content=True)
+async def donate(ctx, amount : str = None):
+ embed = discord.Embed(
+        colour = discord.Colour.orange()
+ )
+ num = 0
+ if amount:
+  embed.set_author(name=" ")
+  embed.add_field(name="Users: ", value=" Here's a test for if donations work",inline=False)
+  await ctx.send_message(ctx.message.author," ", embed=embed)
+ else:
+  embed.set_author(name=" ")
+  embed.add_field(name=":x: Incorrect usage: ", value="Correct usage- !donate [amount]",inline=False)
+  await ctx.send_message(" ", embed=embed)
+    
     
         
 @client.event
