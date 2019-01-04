@@ -242,18 +242,24 @@ async def donate(ctx, amount : int = None):
  )
  num = 0
  if amount:
-  if  amount > 0 and amount < 50: 
+  if  amount > 1000: 
    embed.set_author(name=" ")
-   embed.add_field(name=":x: Sorry", value="That donation is to small, 50 is the minimum",inline=False)
+   embed.add_field(name="Large donations ", value="https://www.roblox.com/catalog/2693098576/Large-Donations",inline=False)
    await ctx.message.author.send(" ", embed=embed)
-  elif amount > 50 and amount < 100: 
+  elif amount > 500: 
    embed.set_author(name=" ")
-   embed.add_field(name="Micro donations ", value="https://www.roblox.com/catalog/2693093169/Micro-Donation",inline=False)
+   embed.add_field(name="Medium donations ", value="https://www.roblox.com/catalog/2693097087/Medium-Donations",inline=False)
    await ctx.message.author.send(" ", embed=embed)
-  elif amount > 100 and amount < 500: 
+  elif amount > 100: 
    embed.set_author(name=" ")
    embed.add_field(name="Small donations ", value="https://www.roblox.com/catalog/2693095047/Small-Donations",inline=False)
    await ctx.message.author.send(" ", embed=embed)
+  elif amount > 50:
+   embed.set_author(name=" ")
+   embed.add_field(name="Micro donations ", value="https://www.roblox.com/catalog/2693093169/Micro-Donation",inline=False)
+  else:
+   embed.set_author(name=" ")
+   embed.add_field(name=":x: Sorry", value="That donation is to small, 50 is the minimum",inline=False)
  else:
   embed.set_author(name=" ")
   embed.add_field(name=":x: Incorrect usage: ", value="/donate [amount]",inline=False)
