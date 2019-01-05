@@ -269,15 +269,16 @@ async def donate(ctx, amount : int = None):
     
 @client.command(pass_content=True)
 async def winner(ctx, item : str , user : discord.Member):
- embed = discord.Embed(
+ if ctx.message.author.guild_permissions.ban_members:
+  embed = discord.Embed(
         colour = discord.Colour.orange()
- )
- server = discord.utils.get(client.guilds, name='Bot making')
- channel = discord.utils.get(server.channels, name="weapon-winner-log")  
- embed.set_author(name=" ")
- embed.add_field(name="Added", value= str(user)+" has been added to the list of winners and their item won is the "+item,inline=False)
- await ctx.send(" ", embed=embed)
- await channel.send(" ", embed=embed)
+  )
+  server = discord.utils.get(client.guilds, name='Bot making')
+  channel = discord.utils.get(server.channels, name="weapon-winner-log")  
+  embed.set_author(name=" ")
+  embed.add_field(name="Added", value= str(user)+" has been added to the list of winners and their item won is the "+item,inline=False)
+  await ctx.send(" ", embed=embed)
+  await channel.send(" ", embed=embed)
    
     
 @client.command(pass_content=True)
