@@ -289,6 +289,29 @@ async def group(ctx, amount : int = None):
  embed.set_author(name=" ")
  embed.add_field(name="Group", value="https://www.roblox.com/My/Groups.aspx?gid=4622364",inline=False)
  await ctx.message.author.send(" ", embed=embed)
+       
+    
+@client.command(pass_content=True)
+async def activegiveaway(ctx):
+ embed = discord.Embed(
+        colour = discord.Colour.orange()
+ )
+ guild = ctx.message.guild
+ channel =discord.utils.get(guild.channels, name="giveaways")
+ embed.set_author(name=" ")
+ embed.add_field(name="Group", value="https://www.roblox.com/My/Groups.aspx?gid=4622364",inline=False)
+ msg = await channel.send("React with :tada: to join the giveaway", embed=embed)
+ add_reaction(msg, "🎉")
+ giveaway = True
+ discord.on_add_reaction(reaction, user):
+   if giveaway == True:
+    if reaction.message == msg:
+        await.channel.send(user+" joined the giveaway")
+ await asyncio.sleep(10)
+ giveaway = False
+ 
+ 
+  
         
 @client.event
 async def on_member_join(member):
