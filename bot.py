@@ -276,7 +276,7 @@ async def winner(ctx, item : str , user : discord.Member):
  channel = discord.utils.get(server.channels, name="weapon-winner-log")  
  embed.set_author(name=" ")
  embed.add_field(name="Added", value= str(user)+" has been added to the list of winners and their item won is the "+item,inline=False)
- await ctx.message.author.send(" ", embed=embed)
+ await ctx.send(" ", embed=embed)
  await channel.send(" ", embed=embed)
    
     
