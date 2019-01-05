@@ -302,11 +302,10 @@ async def activegiveaway(ctx):
  embed.add_field(name="Test Giveaway", value="Giveaway ends in 10 seconds boi",inline=False)
  msg = await channel.send("React with :tada: to join the giveaway", embed=embed)
  await msg.add_reaction(emoji="🎉")
+ global giveaway
  giveaway = True
  await asyncio.sleep(10)
  giveaway = False
- 
- 
   
         
 @client.event
