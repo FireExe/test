@@ -303,10 +303,6 @@ async def activegiveaway(ctx):
  msg = await channel.send("React with :tada: to join the giveaway", embed=embed)
  add_reaction(msg, "🎉")
  giveaway = True
- discord.on_add_reaction(reaction, user):
-   if giveaway == True:
-    if reaction.message == msg:
-        await.channel.send(user+" joined the giveaway")
  await asyncio.sleep(10)
  giveaway = False
  
