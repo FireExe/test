@@ -299,9 +299,9 @@ async def activegiveaway(ctx):
  guild = ctx.message.guild
  channel =discord.utils.get(guild.channels, name="giveaways")
  embed.set_author(name=" ")
- embed.add_field(name="Group", value="https://www.roblox.com/My/Groups.aspx?gid=4622364",inline=False)
+ embed.add_field(name="Test Giveaway", value="Giveaway ends in 10 seconds boi",inline=False)
  msg = await channel.send("React with :tada: to join the giveaway", embed=embed)
- add_reaction(msg, "🎉")
+ client.add_reaction(msg, "🎉")
  giveaway = True
  await asyncio.sleep(10)
  giveaway = False
