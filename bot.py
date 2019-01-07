@@ -14,6 +14,7 @@ client.remove_command("help")
 QOTD = "None"
 data = {}
 data["User"]=[]
+giveawaymessage = "None"
     
 
 async def status_task():
@@ -302,11 +303,21 @@ async def activegiveaway(ctx):
  embed.add_field(name="Test Giveaway", value="Giveaway ends in 10 seconds boi",inline=False)
  msg = await channel.send("React with :tada: to join the giveaway", embed=embed)
  await msg.add_reaction(emoji="🎉")
- global giveaway
- giveaway = True
+ global giveawaymessage
+ giveawaymessage = msg
  await asyncio.sleep(10)
- giveaway = False
+ giveawaymessage = "None"
   
+    
+ @client.event
+ async def on_reaction_add(reaction, user):
+   if giveawaymessage != "None":
+    if reaction.message == giveawaymessage:
+        guild = ctx.message.guild
+        channel =discord.utils.get(guild.channels, name="giveaways")
+        channel.send(user+" has joined the active giveaway")
+        
+        
         
 @client.event
 async def on_member_join(member):
