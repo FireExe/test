@@ -311,11 +311,12 @@ async def activegiveaway(ctx):
     
  @client.event
  async def on_reaction_add(reaction, user):
+   print("a reaction was added by")
    if giveawaymessage != "None":
     if reaction.message == giveawaymessage:
         guild = ctx.message.guild
         channel =discord.utils.get(guild.channels, name="giveaways")
-        channel.send(user+" has joined the active giveaway")
+        channel.send(str(user.mention)+" has joined the active giveaway")
         
         
         
