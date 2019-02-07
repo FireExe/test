@@ -332,9 +332,8 @@ async def blackjack(ctx):
         playercards.append(cards[num])
         cards.remove(cards[num])
         values.remove(values[num])
-        ctx.send("Your starting deck is...")
-        for item in playercards:
-           await ctx.send(item)
+        ctx.send("Your starting deck is..."+playercards)
+        
         await ctx.send("and is worth "+str(playervalue))
     for x in range(0,2):
         cardnum = -1
