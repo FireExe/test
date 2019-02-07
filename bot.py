@@ -353,9 +353,6 @@ async def blackjack(ctx):
             num = random.randint(0,cardnum)
             ctx.send("Hit[H] or Stand[S]")
             card = await client.wait_for('message', check=lambda message: message.author == ctx.author, timeout=10)
-            except asynico.TimeoutError:
-                await ctx.send("You took too long to respond")
-                return
             card = card.content.lower()
             if card == "H" or card == "h":
                 ctx.send("I've drawn "+cards[num]+" for you")
