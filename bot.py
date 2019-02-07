@@ -383,8 +383,8 @@ async def blackjack(ctx):
                                      
         
     
- @client.event
- async def on_reaction_add(reaction, user):
+@client.event
+async def on_reaction_add(reaction, user):
    print("a reaction was added by")
    if giveawaymessage != "None":
     if reaction.message == giveawaymessage:
