@@ -365,6 +365,7 @@ async def blackjack(ctx):
                  await ctx.send("You don't get a card then")
             else:
                  await ctx.send("I don't know that action")
+                 strike = strike + 1
             choice = random.randint(0,1)
             if choice ==1:
              cardnum = -1
@@ -379,7 +380,16 @@ async def blackjack(ctx):
              await ctx.send("My hand is now worth "+str(computervalue))
             else:
              await ctx.send("I'm standing")
-            
+    if strike == 2:
+      await ctx.send("I win because your just spamming random keys")  
+    elif playervalue == 21:
+       await ctx.send("You win")
+    elif playervalue > 21:
+        await ctx.send("You've bust so i win")
+    elif computervalue == 21:
+        await ctx.send("I win")
+    elif computervalue > 21:
+        await ctx.send("I've bust so you win")
                                      
         
     
