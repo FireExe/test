@@ -349,7 +349,7 @@ async def blackjack(ctx):
              cardnum = cardnum + 1
             num = random.randint(0,cardnum)
             await ctx.send("Hit[H] or Stand[S]")
-            card = await client.wait_for('message', check=lambda message: message.author == ctx.author, timeout=60)
+            card = await client.wait_for('message', check=lambda message: message.author == ctx.author, timeout=61)
             card = card.content.lower()
             if card == "H" or card == "h":
                 await ctx.send("I've drawn "+cards[num]+" for you")
