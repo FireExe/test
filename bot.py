@@ -332,9 +332,10 @@ async def blackjack(ctx):
         playercards.append(cards[num])
         cards.remove(cards[num])
         values.remove(values[num])
-        ctx.send("Your starting deck is..."+playercards)
-        
-        await ctx.send("and is worth "+str(playervalue))
+    ctx.send("Your starting deck is...")
+    for item in playercards:
+        await ctx.send(item)
+    await ctx.send("and is worth "+str(playervalue))
     for x in range(0,2):
         cardnum = -1
         for item in cards:
@@ -351,7 +352,7 @@ async def blackjack(ctx):
              cardnum = cardnum + 1
             num = random.randint(0,cardnum)
             await ctx.send("Hit[H] or Stand[S]")
-            card = await client.wait_for('message', check=lambda message: message.author == ctx.author, timeout=10)
+            card = await client.wait_for('message', check=lambda message: message.author == ctx.author, timeout=60)
             card = card.content.lower()
             if card == "H" or card == "h":
                 await ctx.send("I've drawn "+cards[num]+" for you")
