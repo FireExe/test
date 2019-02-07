@@ -359,7 +359,7 @@ async def blackjack(ctx):
                 playercards.append(cards[num])
                 playervalue = playervalue + values[num]
                 cards.remove(cards[num])
-                values.remove(values[num)
+                values.remove(values[num])
                 ctx.send("Your hand is now worth "+str(playervalue))
             elif card == "S" or card == "s":
                  ctx.send("You don't get a card then")
