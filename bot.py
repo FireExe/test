@@ -82,7 +82,7 @@ async def roasts(ctx):
     
 @client.command()
 async def version(ctx):
-    await ctx.send("Elemental Soul Bot v.08 by >Fire.Exe")
+    await ctx.send("Elemental Soul Bot v.13 by >Fire.Exe")
 
 
 @client.command()
