@@ -319,7 +319,7 @@ async def blackjack(ctx):
         "9 of hearts","1 of hearts","3 of diamonds"
     ]
     values = [
-        10,10,10,10,10,10,10,3,5,1,8,4,6,7,9,1,3  
+        10,10,10,10,10,10,10,10,3,5,1,8,4,6,7,9,1,3  
     ]
     playercards = []
     computercards = []
