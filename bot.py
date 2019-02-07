@@ -307,7 +307,7 @@ async def activegiveaway(ctx):
  giveawaymessage = msg
  await asyncio.sleep(10)
  giveawaymessage = "None"
-  
+ 
 @client.command(pass_content=True)
 async def blackjack(ctx): 
     playervalue = 0
@@ -336,7 +336,7 @@ async def blackjack(ctx):
         for item in playercards:
             ctx.send(item)
         ctx.send("and is worth "+str(playervalue))
-     for x in range(0,2):
+    for x in range(0,2):
         cardnum = -1
         for item in cards:
             cardnum = cardnum + 1
@@ -346,7 +346,7 @@ async def blackjack(ctx):
         cards.remove(cards[num])
         values.remove(values[num])
         ctx.send("And mine is worth "+str(computervalue))
-        while computervalue < 21 and playervalue < 21 and strike < 2:
+    while computervalue < 21 and playervalue < 21 and strike < 2:
             cardnum = -1
             for item in cards:
              cardnum = cardnum + 1
