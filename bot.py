@@ -81,7 +81,7 @@ async def roasts(ctx):
     
 @client.command()
 async def version(ctx):
-    await ctx.send("Elemental Soul Bot v.13 by >Fire.Exe")
+    await ctx.send("Elemental Soul Bot v.14 by >Fire.Exe")
 
 
 @client.command()
@@ -348,7 +348,7 @@ async def blackjack(ctx):
         playercards.append(cards[num])
         cards.remove(cards[num])
         values.remove(values[num])
-    await ctx.send("Your starting deck is worth "+str(playervalue)+" and is consists of...")
+    await ctx.send("Your starting deck is worth "+str(playervalue)+" and consists of...")
     for item in playercards:
            await ctx.send(item)
     for x in range(0,2):
