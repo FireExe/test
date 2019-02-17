@@ -12,8 +12,7 @@ client.remove_command("help")
 #you can checkthe Discord API Documentaion for more event Functions 
 # here: https://discordapp.com/developers
 QOTD = "None"
-data = {}
-data["User"]=[]
+lockdown = False
 giveawaymessage = "None"
     
 
@@ -176,8 +175,21 @@ async def mute(ctx, user: discord.Member):
          role = discord.utils.get(server.roles, name="Muted")
          await ctx.send(str(user.name)+" has been muted")
          await user.add_roles(role)
-        
-        
+     
+@client.command()
+async def lock(ctx):
+   if ctx.message.author.guild_permissions.ban_members:
+    await ctx.send("This channel will be locked until the command /unlock is used")
+    rolesearch = discord.utils.get(ctx.message.guild.roles, name="Community")
+    await ctx.message.channel.set_permissions(rolesearch, send_messages=False)
+    
+@client.command()
+async def unlock(ctx):
+   if ctx.message.author.guild_permissions.ban_members:
+    await ctx.send("This channel will be unlocked until the command /lock is used")
+    rolesearch = discord.utils.get(ctx.message.guild.roles, name="Community")
+    await ctx.message.channel.set_permissions(rolesearch, send_messages=True)
+     
 @client.command(pass_content=True)   
 async def unmute(ctx, user: discord.Member):
         if ctx.message.author.guild_permissions.kick_members:
