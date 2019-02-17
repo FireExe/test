@@ -220,6 +220,8 @@ async def help(ctx):
  embed.set_author(name="Help")
  embed.add_field(name="/help", value="Shows this message",inline=False)
  embed.add_field(name="/roasts", value="Get roasted",inline=False)
+ embed.add_field(name="/blackjack", value="Play some blackjack",inline=False)
+ embed.add_field(name="/group", value="Get the group link",inline=False)
  embed.add_field(name="/version", value="Checks my version",inline=False)
  embed.add_field(name="/assign", value="Give yourself a role",inline=True)
  embed.add_field(name="Example:", value="/assign QOTDping",inline=True)
@@ -230,6 +232,8 @@ async def help(ctx):
  embed.add_field(name="Example:", value="/kick YourDad",inline=True)
  embed.add_field(name="/ban", value="Ban a user",inline=False)
  embed.add_field(name="Example:", value="/ban YourDad",inline=True)
+ embed.add_field(name="/lock", value="Locks the channel the command was used in",inline=False)
+ embed.add_field(name="/unlock", value="Unlocks the channel the command was useed in",inline=False)
  await ctx.send("Here's all the commands and their uses:", embed=embed)
         
     
