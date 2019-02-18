@@ -197,7 +197,19 @@ async def unmute(ctx, user: discord.Member):
          role = discord.utils.get(server.roles, name="Muted")
          await ctx.send(str(user.name)+" has been unmuted")
          await user.remove_roles(role)
+
+async def update_data(users, user, server):
+    if not str(user.id) + "-" + str(server.id) in users:
+        users[str(user.id) + "-" + str(server.id)] = {}
+        users[str(user.id) + "-" + str(server.id)]["money"] = 100
+        users[str(user.id) + "-" + str(server.id)]["strikes"] = 0
+        users[str(user.id) + "-" + str(server.id)]["experience"] = 0
+        users[str(user.id) + "-" + str(server.id)]["level"] = 1)   
             
+@client.command(pass_content=True)   
+async def daily(ctx): 
+ with open("Data.json", "r+") as f:
+    await update_data(f,ctx.message.author,ctx.message.guild)
             
 @client.command(pass_content=True)   
 async def roleall(ctx, left: str):
