@@ -200,11 +200,8 @@ async def unmute(ctx, user: discord.Member):
 
 async def update_data(users, user, server):
     if not str(user.id) + "-" + str(server.id) in users:
-        users[str(user.id) + "-" + str(server.id)] = {}
-        users[str(user.id) + "-" + str(server.id)]["money"] = 100
-        users[str(user.id) + "-" + str(server.id)]["strikes"] = 0
-        users[str(user.id) + "-" + str(server.id)]["experience"] = 0
-        users[str(user.id) + "-" + str(server.id)]["level"] = 1)   
+        print("no data")
+      
             
 @client.command(pass_content=True)   
 async def daily(ctx): 
