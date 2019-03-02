@@ -94,13 +94,17 @@ async def dm(ctx,role, *, msg):
    embed.set_author(name=" ")
    embed.add_field(name="Message from "+str(ctx.message.author.name), value=msg,inline=False)
    if role == "all":
-    x = ctx.guild.members
-    num = 0
-    for member in x:
-      if member.id == client.user.id:
-        return
-      else:
-       await member.send(" ", embed=embed)
+    role = discord.utils.get(ctx.message.guild.roles, name="Bots")
+    x = role.members
+    z = ctx.guild.members
+    for member in z:
+      if member in x:
+       return
+      else: 
+         if member.id == client.user.id:
+          return
+         else:
+            await member.send(" ", embed=embed)
    else:
     role = discord.utils.get(ctx.message.guild.roles, name=role)
     x = role.members
