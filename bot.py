@@ -1,4 +1,4 @@
-import os, discord, random, datetime, time, asyncio, json
+import os, discord, random, datetime, time, asyncio, json, urllib
 from discord.ext.commands import Bot
 
 # We'll need to substitute the Prefix for an Enviroment Variable
@@ -83,6 +83,14 @@ async def roasts(ctx):
 @client.command()
 async def version(ctx):
     await ctx.send("Elemental Soul Bot v.14 by >Fire.Exe")
+    
+
+@client.command()
+async def testing(ctx):
+    f = urllib.urlopen("https://daviseford.com/shittalk/")
+    s = f.read()
+    print(s)
+    f.close()
 
 
 @client.command()
