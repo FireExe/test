@@ -97,12 +97,18 @@ async def dm(ctx,role, *, msg):
     x = ctx.guild.members
     num = 0
     for member in x:
-      await member.send(" ", embed=embed)
+      if member.id == client.user.id:
+        return
+      else:
+       await member.send(" ", embed=embed)
    else:
     x = ctx.guild.members
     for member in x:
       for r in member.roles:
         if role in roles:
+         if member.id == client.user.id:
+          return
+         else:
             await member.send(" ", embed=embed)
     
 
