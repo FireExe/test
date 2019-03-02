@@ -102,9 +102,9 @@ async def dm(ctx,role, *, msg):
       else:
        await member.send(" ", embed=embed)
    else:
-    x = ctx.guild.members
+    role = discord.utils.get(server.roles, name=role)
+    x = role.members
     for member in x:
-        if role in member.roles:
          if member.id == client.user.id:
           return
          else:
