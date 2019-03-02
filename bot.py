@@ -104,8 +104,7 @@ async def dm(ctx,role, *, msg):
    else:
     x = ctx.guild.members
     for member in x:
-      for r in member.roles:
-        if role in roles:
+        if role in member.roles:
          if member.id == client.user.id:
           return
          else:
