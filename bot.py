@@ -82,15 +82,29 @@ async def roasts(ctx):
     
 @client.command()
 async def version(ctx):
-    await ctx.send("Elemental Soul Bot v.14 by >Fire.Exe")
+    await ctx.send("Elemental Soul Bot v.15 by >Fire.Exe")
     
 
 @client.command()
-async def testing(ctx):
-    f = urllib.urlopen("https://daviseford.com/shittalk/")
-    s = f.read()
-    print(s)
-    f.close()
+async def dm(ctx,role, *, msg):
+  if ctx.message.author.guild_permissions.ban_members:
+   embed = discord.Embed(
+        colour = discord.Colour.orange()
+   )
+   embed.set_author(name=" ")
+   embed.add_field(name="Message from "+str(ctx.message.author.Name), value=msg,inline=False)
+   if role == "all":
+    x = ctx.guild.members
+    num = 0
+    for member in x:
+      await member.send(" ", embed=embed)
+   else:
+    x = ctx.guild.members
+    for member in x:
+      for r in member.roles:
+        if role in roles:
+            await member.send(" ", embed=embed)
+    
 
 
 @client.command()
@@ -197,16 +211,6 @@ async def unmute(ctx, user: discord.Member):
          role = discord.utils.get(server.roles, name="Muted")
          await ctx.send(str(user.name)+" has been unmuted")
          await user.remove_roles(role)
-
-async def update_data(users, user, server):
-    if not str(user.id) + "-" + str(server.id) in users:
-        print("no data")
-      
-            
-@client.command(pass_content=True)   
-async def daily(ctx): 
- with open("Data.json", "r+") as f:
-    await update_data(f,ctx.message.author,ctx.message.guild)
             
 @client.command(pass_content=True)   
 async def roleall(ctx, left: str):
