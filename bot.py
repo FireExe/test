@@ -60,7 +60,7 @@ async def roasts(ctx):
      "Two wrongs don't make a right, take your parents as an example",
      "I don't care about your short comings, but your long stayings",
      "I would try hurt you instead of roasting, but it would be considered animal abuse",
-     "I'm not trash talking, I'm talking to trash",
+     "You are the reason the gene pool needs a lifeguard",
      "It's a waste of time trying to cuss something so irrelevant",
      "I'm jealous of people that don't know you",
      "A million years of evolution and we get you",
@@ -71,7 +71,8 @@ async def roasts(ctx):
      "It must have been a sad day when you crawled from the abortion bucket",
      "Maybe you should try something more on your level, like rock-paper-scissors",
      "WOW! imagine if your parents weren't siblings",
-     "Nooooob"
+     "Nooooob",
+     "With aim like that, I pity whoever has to clean the floor around your toilet"
     ]
     await ctx.send(random.choice(choices))
    else:
