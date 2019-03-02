@@ -92,7 +92,7 @@ async def dm(ctx,role, *, msg):
         colour = discord.Colour.orange()
    )
    embed.set_author(name=" ")
-   embed.add_field(name="Message from "+str(ctx.message.author.Name), value=msg,inline=False)
+   embed.add_field(name="Message from "+str(ctx.message.author.name), value=msg,inline=False)
    if role == "all":
     x = ctx.guild.members
     num = 0
