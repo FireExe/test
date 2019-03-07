@@ -116,7 +116,7 @@ async def dm(ctx,role, *, msg):
            
 @client.command()
 async def dm_user(ctx,member: discord.Member, *, msg):
-  if ctx.message.author.guild_permissions.ban_members:
+  if ctx.message.author.id == Id:
    embed = discord.Embed(
         colour = discord.Colour.orange()
    )
