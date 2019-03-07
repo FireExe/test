@@ -121,7 +121,7 @@ async def dm_user(ctx,member: discord.Member, *, msg):
         colour = discord.Colour.orange()
    )
    embed.set_author(name=" ")
-   embed.add_field(name="Message from "+str(ctx.message.author.name), value=msg,inline=False)
+   embed.add_field(name="Message from the void", value=msg,inline=False)
    await member.send(" ", embed=embed)
     
 
