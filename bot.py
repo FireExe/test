@@ -113,6 +113,16 @@ async def dm(ctx,role, *, msg):
           return
          else:
             await member.send(" ", embed=embed)
+           
+@client.command()
+async def dm member(ctx,member: discord.Member, *, msg):
+  if ctx.message.author.guild_permissions.ban_members:
+   embed = discord.Embed(
+        colour = discord.Colour.orange()
+   )
+   embed.set_author(name=" ")
+   embed.add_field(name="Message from "+str(ctx.message.author.name), value=msg,inline=False)
+   await member.send(" ", embed=embed)
     
 
 
