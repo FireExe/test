@@ -4,6 +4,7 @@ from discord.ext.commands import Bot
 # We'll need to substitute the Prefix for an Enviroment Variable
 BOT_PREFIX = os.environ['prefix'] # -Prfix is need to declare a Command in discord ex: !pizza "!" being the Prefix
 TOKEN = os.environ['token'] # The token is also substituted for security reasons
+Id = os.environ['Id']
 
 client = Bot(command_prefix=BOT_PREFIX)
 client.remove_command("help")
