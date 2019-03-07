@@ -117,7 +117,8 @@ async def dm(ctx,role, *, msg):
            
 @client.command()
 async def dm_user(ctx,member: discord.Member, *, msg):
-  if ctx.message.author.id == Id:
+  print(str(ctx.message.author.id))
+  if int(ctx.message.author.id) == int(Id):
    embed = discord.Embed(
         colour = discord.Colour.orange()
    )
