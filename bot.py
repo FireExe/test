@@ -340,7 +340,16 @@ async def group(ctx, amount : int = None):
  embed.set_author(name=" ")
  embed.add_field(name="Group", value="https://www.roblox.com/My/Groups.aspx?gid=4622364",inline=False)
  await ctx.message.author.send(" ", embed=embed)
-       
+   
+
+@client.command(pass_content=True)
+async def trello(ctx, amount : int = None):
+ embed = discord.Embed(
+        colour = discord.Colour.orange()
+ )
+ embed.set_author(name=" ")
+ embed.add_field(name="Trello", value="https://trello.com/b/8aprufdU/elemental-soul",inline=False)
+ await ctx.message.author.send(" ", embed=embed)
     
 @client.command(pass_content=True)
 async def activegiveaway(ctx):
