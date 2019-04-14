@@ -527,7 +527,7 @@ async def on_message(message):
         if message.author.guild_permissions.ban_members:
             print("Working")
         else:
-          await client.delete_message(message)
+            await message.delete()
     
     
 client.run(TOKEN)
