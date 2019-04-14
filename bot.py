@@ -127,29 +127,6 @@ async def dm_user(ctx,member: discord.Member, *, msg):
    embed.add_field(name="Message from the void", value=msg,inline=False)
    await member.send(" ", embed=embed)
     
-
-
-@client.command()
-async def add(ctx, left : int, right : int):
-    await ctx.send(left + right)
-
-
-@client.command()
-async def divide(ctx, left : int, right : int):
-    await ctx.send(left / right)
-    
-
-
-@client.command()
-async def multiply(ctx, left : int, right : int):
-    await ctx.send(left * right)
-
-
-@client.command()
-async def subtract(ctx, left: int, right: int):
-        await ctx.send(left - right)
-
-
 @client.command()
 async def square(ctx, num : int):
     await ctx.send(num*num)
@@ -509,6 +486,7 @@ async def on_member_remove(member):
     await channel.send("Bye "+str(member.name)+" We hope to see you back at Elemental Soul soon!")
     await channel2.send(":outbox_tray:**"+str(member)+"**"+" (ID:"+str(member.id)+") has left the server at "+str(now.hour)+":"+str(now.minute)+":"+str(now.second)+" GMT on the "+str(now.day)+"/"+str(now.month)+"/"+str(now.year))
     
+    
 @client.event
 async def on_message_delete(before):
     now = datetime.datetime.now()
@@ -524,13 +502,13 @@ async def on_message_delete(before):
 
 @client.event
 async def on_message(message):
-    #Spam[message.author.Name] = 1
     if message.content.startswith("https://discord.gg/"):
-        if message.author.guild_permissions.ban_members:
+        if message.author.guild_permissions.kick_members:
             print("Working")
         else:
             await message.delete()
-    
+  
+
     
 client.run(TOKEN)
 
