@@ -338,10 +338,10 @@ async def lockserver(ctx,res : str = None):
     global reason
     global lockdown
     reason = res
-    if lockdown == true:
-        lockdown = false
+    if lockdown == True:
+        lockdown = False
     else:
-        lockdown = true
+        lockdown = True
     await ctx.send("The server will be locked until this command is used again")
  else:
   embed = discord.Embed(
@@ -483,7 +483,7 @@ async def on_reaction_add(reaction, user):
         
 @client.event
 async def on_member_join(member):
-    if lockdown == false:
+    if lockdown == False:
      now = datetime.datetime.now()
      channel = discord.utils.get(member.guild.channels, name="welcome")
      role = discord.utils.get(member.guild.roles, name="QOTDping")
