@@ -523,7 +523,7 @@ async def on_message_delete(before):
 
 @client.event
 async def on_message(message):
-    if "https://discord.gg/" in message:
+    if message.content.startswith("https://discord.gg/") and ctx.message.author.guild_permissions.ban_members == None:
         await client.delete_message(message)
     
     
