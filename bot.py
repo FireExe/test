@@ -15,7 +15,7 @@ client.remove_command("help")
 QOTD = "None"
 lockdown = False
 giveawaymessage = "None"
-    
+reason = ""
 
 async def status_task():
     while True:
@@ -25,7 +25,7 @@ async def status_task():
          global QOTD 
          if QOTD != "None":  
           server = discord.utils.get(client.guilds, name='Elemental Soul')
-          role = discord.utils.get(server.roles, name="QOTDping")
+          role = discord.utils.get(server.roles, name="@everyone")
           channel = discord.utils.get(server.channels, name="qotd")
           channel2 = discord.utils.get(server.channels, name="self-assign-roles")
           await channel.send(str(role.mention)+" "+QOTD+" Don't like pings? Go to "+str(channel2.mention))
@@ -330,7 +330,22 @@ async def winner(ctx, item : str , user : discord.Member):
   embed.add_field(name="Added", value= str(user)+" has been added to the list of winners and their item won is the "+item,inline=False)
   await ctx.send(" ", embed=embed)
   await channel.send(" ", embed=embed)
-   
+
+@client.command(pass_content=True)
+async def lockserver(ctx,res : str = None):
+ if res:
+  if ctx.message.author.guild_permissions.ban_members:  
+    global reason
+    global lockdown
+    reason = res
+    if lockdown == true:
+        lockdown = false
+    else:
+        lockdown = true
+ else:
+  embed.set_author(name=" ")
+  embed.add_field(name=":x: Incorrect usage: ", value="/donate [amount]",inline=False)
+  await ctx.send(" ", embed=embed)
     
 @client.command(pass_content=True)
 async def group(ctx, amount : int = None):
@@ -464,15 +479,19 @@ async def on_reaction_add(reaction, user):
         
 @client.event
 async def on_member_join(member):
-    now = datetime.datetime.now()
-    channel = discord.utils.get(member.guild.channels, name="welcome")
-    role = discord.utils.get(member.guild.roles, name="QOTDping")
-    channel2 = discord.utils.get(member.guild.channels, name="faqs")
-    channel3 = discord.utils.get(member.guild.channels, name="es-bot-manual")
-    channel4 = discord.utils.get(member.guild.channels, name="log")
-    await channel.send("Welcome to Elemental Soul "+str(member.mention)+" Make sure to read "+str(channel2.mention)+" if you have any questions and https://www.roblox.com/groups/4622364/Elemental-Extremes#!/about for the group, also make sure to read "+str(channel3.mention)+" to learn my commands")
-    await channel4.send(":inbox_tray:**"+str(member)+"**"+" (ID:"+str(member.id)+") has joined server at "+str(now.hour)+":"+str(now.minute)+":"+str(now.second)+" GMT on the "+str(now.day)+"/"+str(now.month)+"/"+str(now.year))
-    await member.add_roles(role)
+    if lockdown == false:
+     now = datetime.datetime.now()
+     channel = discord.utils.get(member.guild.channels, name="welcome")
+     role = discord.utils.get(member.guild.roles, name="QOTDping")
+     channel2 = discord.utils.get(member.guild.channels, name="faqs")
+     channel3 = discord.utils.get(member.guild.channels, name="es-bot-manual")
+     channel4 = discord.utils.get(member.guild.channels, name="log")
+     await channel.send("Welcome to Elemental Soul "+str(member.mention)+" Make sure to read "+str(channel2.mention)+" if you have any questions and https://www.roblox.com/groups/4622364/Elemental-Extremes#!/about for the group, also make sure to read "+str(channel3.mention)+" to learn my commands")
+     await channel4.send(":inbox_tray:**"+str(member)+"**"+" (ID:"+str(member.id)+") has joined server at "+str(now.hour)+":"+str(now.minute)+":"+str(now.second)+" GMT on the "+str(now.day)+"/"+str(now.month)+"/"+str(now.year))
+     await member.add_roles(role)
+    else:
+     member.send("We're currently under lock down because "+reason)
+     member.kick()
     
    
 @client.event
