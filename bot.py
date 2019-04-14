@@ -502,6 +502,7 @@ async def on_message_delete(before):
 
 @client.event
 async def on_message(message):
+    await client.process_commands(message)
     if message.content.startswith("https://discord.gg/"):
         if message.author.guild_permissions.kick_members:
             print("Working")
