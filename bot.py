@@ -16,6 +16,7 @@ QOTD = "None"
 lockdown = False
 giveawaymessage = "None"
 reason = ""
+Spam = []
 
 async def status_task():
     while True:
@@ -523,6 +524,7 @@ async def on_message_delete(before):
 
 @client.event
 async def on_message(message):
+    spam[message.author.Name] = 1
     if message.content.startswith("https://discord.gg/"):
         if message.author.guild_permissions.ban_members:
             print("Working")
