@@ -340,9 +340,11 @@ async def lockserver(ctx,res : str = None):
     reason = res
     if lockdown == True:
         lockdown = False
+        await ctx.send("The server will be unlocked until this command is used again")
     else:
         lockdown = True
-    await ctx.send("The server will be locked until this command is used again")
+        await ctx.send("The server will be locked until this command is used again")
+    
  else:
   embed = discord.Embed(
         colour = discord.Colour.orange()
@@ -519,7 +521,12 @@ async def on_message_delete(before):
     channel2 = discord.utils.get(server.channels, name=str(before.channel))
     await channel.send(""+str(now.hour)+":"+str(now.minute)+":"+str(now.second)+" :x:**"+str(before.author)+"**"+" (ID:"+str(before.author.id)+")'s has been deleted from "+str(channel2.mention)+":", embed=embed)
 
-
+@client.event
+async def on_message(message):
+    if "https://discord.gg/" in message:
+        await client.delete_message(message)
+    
+    
 client.run(TOKEN)
 
 
