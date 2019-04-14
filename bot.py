@@ -342,9 +342,13 @@ async def lockserver(ctx,res : str = None):
         lockdown = false
     else:
         lockdown = true
+    await ctx.send("The server will be locked until this command is used again")
  else:
+  embed = discord.Embed(
+        colour = discord.Colour.orange()
+  ) 
   embed.set_author(name=" ")
-  embed.add_field(name=":x: Incorrect usage: ", value="/donate [amount]",inline=False)
+  embed.add_field(name=":x: Incorrect usage: ", value="/lockserver [reason]",inline=False)
   await ctx.send(" ", embed=embed)
     
 @client.command(pass_content=True)
@@ -490,8 +494,8 @@ async def on_member_join(member):
      await channel4.send(":inbox_tray:**"+str(member)+"**"+" (ID:"+str(member.id)+") has joined server at "+str(now.hour)+":"+str(now.minute)+":"+str(now.second)+" GMT on the "+str(now.day)+"/"+str(now.month)+"/"+str(now.year))
      await member.add_roles(role)
     else:
-     member.send("We're currently under lock down because "+reason)
-     member.kick()
+     await member.send("We're currently under lock down because "+reason)
+     await member.kick()
     
    
 @client.event
