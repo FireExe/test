@@ -85,7 +85,20 @@ async def roasts(ctx):
 @client.command()
 async def version(ctx):
     await ctx.send("Elemental Soul Bot v.15 by >Fire.Exe")
-    
+
+@client.command()
+async def rolecount(ctx,role):
+ embed = discord.Embed(
+        colour = discord.Colour.orange()
+ )
+ role = discord.utils.get(ctx.message.guild.roles, name=role)
+ num = 0
+ x = role.members
+ for member in x:
+    num = num + 1
+ embed.set_author(name=" ")
+ embed.add_field(name="Users in "+str(role)+":", value=num,inline=False)
+ await ctx.send(" ", embed=embed)
 
 @client.command()
 async def dm(ctx,role, *, msg):
