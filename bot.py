@@ -424,7 +424,7 @@ async def blackjack(ctx):
             await ctx.send("Hit[H] or Stand[S]")
             card = await client.wait_for('message', check=lambda message: message.author == ctx.author, timeout=60)
             card = card.content.lower()
-            if card == "H" or card == "h" or card == "hit" or or card == "Hit":
+            if card == "H" or card == "h" or card == "hit" or card == "Hit":
                 await ctx.send("I've drawn "+cards[num]+" for you")
                 playercards.append(cards[num])
                 playervalue = playervalue + values[num]
