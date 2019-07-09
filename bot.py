@@ -200,7 +200,7 @@ async def kick(ctx, user: discord.Member):
          embed.set_author(name=" ")
          embed.add_field(name=":x: User can not be kicked", value=user+" has moderator permissions",inline=False)
          await ctx.send(" ", embed=embed)
-     else:
+    else:
         if ctx.message.author.guild_permissions.kick_members:
          await ctx.send(str(user.name)+" has been kicked")
          await user.kick()
@@ -222,7 +222,7 @@ async def ban(ctx, user: discord.Member):
          embed.set_author(name=" ")
          embed.add_field(name=":x: User can not be banned", value=user+" has moderator permissions",inline=False)
          await ctx.send(" ", embed=embed)
-     else:
+    else:
         if ctx.message.author.guild_permissions.ban_members:
          await ctx.send(str(user.name)+" has been banned")
          await user.ban()
@@ -237,7 +237,7 @@ async def mute(ctx, user: discord.Member):
          embed.set_author(name=" ")
          embed.add_field(name=":x: User can not be muted", value=user+" has moderator permissions",inline=False)
          await ctx.send(" ", embed=embed)
-     else:
+    else:
       if ctx.message.author.guild_permissions.kick_members:
          server = ctx.message.guild
          role = discord.utils.get(server.roles, name="Muted")
@@ -322,7 +322,7 @@ async def modhelp(ctx):
         colour = discord.Colour.orange()
  )
   
- embed.set_author(name="Help")
+ embed.set_author(name="Moderator Help")
  embed.add_field(name="/modhelp", value="Shows this message",inline=False)
  embed.add_field(name="/kick", value="Kick a user",inline=True)
  embed.add_field(name="Example:", value="/kick Hstist",inline=True)
