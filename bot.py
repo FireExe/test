@@ -166,7 +166,7 @@ async def assign(ctx, left: str):
           colour = discord.Colour.orange()
          ) 
          embed.set_author(name=" ")
-         embed.add_field(name=":x: Invalid role: ", value="'"left+"' is an invalid role",inline=False)
+         embed.add_field(name=":x: Invalid role: ", value="'"+left+"' is an invalid role",inline=False)
          await ctx.send(" ", embed=embed)
      
 @client.command(pass_content=True)
@@ -189,7 +189,7 @@ async def unassign(ctx, left: str):
           colour = discord.Colour.orange()
          ) 
          embed.set_author(name=" ")
-         embed.add_field(name=":x: Invalid role: ", value="'"left+"' is an invalid role",inline=False)
+         embed.add_field(name=":x: Invalid role: ", value="'"+left+"' is an invalid role",inline=False)
          await ctx.send(" ", embed=embed)
 @client.command(pass_content=True)
 async def kick(ctx, user: discord.Member):
@@ -290,7 +290,7 @@ async def roleall(ctx, left: str = None):
           colour = discord.Colour.orange()
          ) 
          embed.set_author(name=" ")
-         embed.add_field(name=":x: Invalid role: ", value="'"left+"' is an invalid role",inline=False)
+         embed.add_field(name=":x: Invalid role: ", value="'"+left+"' is an invalid role",inline=False)
          await ctx.send(" ", embed=embed)
         
         
