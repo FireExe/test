@@ -267,7 +267,7 @@ async def unmute(ctx, user: discord.Member):
          embed.set_author(name=" ")
          embed.add_field(name=":x: User can not be muted", value=user+" has moderator permissions",inline=False)
          await ctx.send(" ", embed=embed)
-     else:
+    else:
         if ctx.message.author.guild_permissions.kick_members:
          server = ctx.message.guild
          role = discord.utils.get(server.roles, name="Muted")
