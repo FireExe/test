@@ -313,21 +313,29 @@ async def unmute(ctx, user: discord.Member):
 @client.command(pass_content=True)   
 async def roleall(ctx, left: str = None):
       if left:
-        if ctx.message.author.guild_permissions.ban_members:
-         server = ctx.message.guild
-         role = discord.utils.get(server.roles, name=left)
-         await ctx.send("I'm gonna start giving everyone the "+left+" role and i'll notify you when i'm done :gear:")
-         x = server.members
-         for member in x:
+        role = discord.utils.get(server.roles, name=left)
+        if role == None:
+          embed = discord.Embed(
+           colour = discord.Colour.orange()
+          ) 
+          embed.set_author(name=" ")
+          embed.add_field(name=":x: Invalid role: ", value="'"+left+"' is an invalid role",inline=False)
+          await ctx.send(" ", embed=embed)  
+        else:
+         if ctx.message.author.guild_permissions.ban_members:
+          server = ctx.message.guild
+          await ctx.send("I'm gonna start giving everyone the "+left+" role and i'll notify you when i'm done :gear:")
+          x = server.members
+          for member in x:
             await member.add_roles(role)
-         await ctx.send(""+str(ctx.message.author.mention)+" I've roled everyone :+1:")
-      else:
-        embed = discord.Embed(
-          colour = discord.Colour.orange()
-        ) 
-        embed.set_author(name=" ")
-        embed.add_field(name=":x: Invalid role: ", value="'"+left+"' is an invalid role",inline=False)
-        await ctx.send(" ", embed=embed)
+          await ctx.send(""+str(ctx.message.author.mention)+" I've roled everyone :+1:")
+         else:
+          embed = discord.Embed(
+           colour = discord.Colour.orange()
+          ) 
+          embed.set_author(name=" ")
+          embed.add_field(name=":x: Incorrect usage: ", value="/roleall [role]",inline=False)
+          await ctx.send(" ", embed=embed)
         
         
 @client.command(pass_content=True)
