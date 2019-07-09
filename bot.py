@@ -312,6 +312,7 @@ async def unmute(ctx, user: discord.Member):
             
 @client.command(pass_content=True)   
 async def roleall(ctx, left: str = None):
+      server = ctx.message.guild
       if left:
         role = discord.utils.get(server.roles, name=left)
         if role == None:
@@ -323,7 +324,6 @@ async def roleall(ctx, left: str = None):
           await ctx.send(" ", embed=embed)  
         else:
          if ctx.message.author.guild_permissions.ban_members:
-          server = ctx.message.guild
           await ctx.send("I'm gonna start giving everyone the "+left+" role and i'll notify you when i'm done :gear:")
           x = server.members
           for member in x:
