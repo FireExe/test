@@ -288,10 +288,10 @@ async def roleall(ctx, left: str = None):
       else:
         embed = discord.Embed(
           colour = discord.Colour.orange()
-         ) 
-         embed.set_author(name=" ")
-         embed.add_field(name=":x: Invalid role: ", value="'"+left+"' is an invalid role",inline=False)
-         await ctx.send(" ", embed=embed)
+        ) 
+        embed.set_author(name=" ")
+        embed.add_field(name=":x: Invalid role: ", value="'"+left+"' is an invalid role",inline=False)
+        await ctx.send(" ", embed=embed)
         
         
 @client.command(pass_content=True)
@@ -321,7 +321,6 @@ async def modhelp(ctx):
  embed = discord.Embed(
         colour = discord.Colour.orange()
  )
-  
  embed.set_author(name="Moderator Help")
  embed.add_field(name="/modhelp", value="Shows this message",inline=False)
  embed.add_field(name="/kick", value="Kick a user",inline=True)
