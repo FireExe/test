@@ -165,9 +165,9 @@ async def assign(ctx, left: str):
          embed = discord.Embed(
           colour = discord.Colour.orange()
          ) 
-          embed.set_author(name=" ")
-          embed.add_field(name=":x: Invalid role: ", value="'"left+"' is an invalid role",inline=False)
-          await ctx.send(" ", embed=embed)
+         embed.set_author(name=" ")
+         embed.add_field(name=":x: Invalid role: ", value="'"left+"' is an invalid role",inline=False)
+         await ctx.send(" ", embed=embed)
      
 @client.command(pass_content=True)
 async def unassign(ctx, left: str):
@@ -188,9 +188,9 @@ async def unassign(ctx, left: str):
          embed = discord.Embed(
           colour = discord.Colour.orange()
          ) 
-          embed.set_author(name=" ")
-          embed.add_field(name=":x: Invalid role: ", value="'"left+"' is an invalid role",inline=False)
-          await ctx.send(" ", embed=embed)
+         embed.set_author(name=" ")
+         embed.add_field(name=":x: Invalid role: ", value="'"left+"' is an invalid role",inline=False)
+         await ctx.send(" ", embed=embed)
 @client.command(pass_content=True)
 async def kick(ctx, user: discord.Member):
     if user.guild_permissions.kick_members:
@@ -264,9 +264,9 @@ async def unmute(ctx, user: discord.Member):
          embed = discord.Embed(
           colour = discord.Colour.orange()
          ) 
-          embed.set_author(name=" ")
-          embed.add_field(name=":x: User can not be muted", value=user+" has moderator permissions",inline=False)
-          await ctx.send(" ", embed=embed)
+         embed.set_author(name=" ")
+         embed.add_field(name=":x: User can not be muted", value=user+" has moderator permissions",inline=False)
+         await ctx.send(" ", embed=embed)
      else:
         if ctx.message.author.guild_permissions.kick_members:
          server = ctx.message.guild
@@ -289,9 +289,9 @@ async def roleall(ctx, left: str = None):
         embed = discord.Embed(
           colour = discord.Colour.orange()
          ) 
-          embed.set_author(name=" ")
-          embed.add_field(name=":x: Invalid role: ", value="'"left+"' is an invalid role",inline=False)
-          await ctx.send(" ", embed=embed)
+         embed.set_author(name=" ")
+         embed.add_field(name=":x: Invalid role: ", value="'"left+"' is an invalid role",inline=False)
+         await ctx.send(" ", embed=embed)
         
         
 @client.command(pass_content=True)
