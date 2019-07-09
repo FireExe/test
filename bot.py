@@ -84,7 +84,7 @@ async def roasts(ctx):
     
 @client.command()
 async def version(ctx):
-    await ctx.send("Elemental Soul Bot v.1.6 by >Fire.Exe")
+    await ctx.send("Elemental Soul Bot v.1.7 by >Fire.Exe")
 
 @client.command()
 async def rolecount(ctx,role):
@@ -198,12 +198,20 @@ async def kick(ctx, user: discord.Member):
           colour = discord.Colour.orange()
          ) 
          embed.set_author(name=" ")
-         embed.add_field(name=":x: User can not be kicked", value=user+" has moderator permissions",inline=False)
+         embed.add_field(name=":x: User can not be kicked", value=str(user.name)+" has moderator permissions",inline=False)
          await ctx.send(" ", embed=embed)
     else:
         if ctx.message.author.guild_permissions.kick_members:
          await ctx.send(str(user.name)+" has been kicked")
          await user.kick()
+        else:
+         embed = discord.Embed(
+          colour = discord.Colour.orange()
+         ) 
+         embed.set_author(name=" ")
+         embed.add_field(name=":x: Lack of permissions", value=str(ctx.message.author.name)+" does not have the permissions to use the `kick` command",inline=False)
+         await ctx.send(" ", embed=embed)
+            
             
 @client.command(pass_content=True)      
 async def qotd(ctx, *, qotd):
@@ -220,12 +228,19 @@ async def ban(ctx, user: discord.Member):
           colour = discord.Colour.orange()
          ) 
          embed.set_author(name=" ")
-         embed.add_field(name=":x: User can not be banned", value=user+" has moderator permissions",inline=False)
+         embed.add_field(name=":x: User can not be banned", value=str(user.name)+" has moderator permissions",inline=False)
          await ctx.send(" ", embed=embed)
     else:
         if ctx.message.author.guild_permissions.ban_members:
          await ctx.send(str(user.name)+" has been banned")
          await user.ban()
+        else:
+         embed = discord.Embed(
+          colour = discord.Colour.orange()
+         ) 
+         embed.set_author(name=" ")
+         embed.add_field(name=":x: Lack of permissions", value=str(ctx.message.author.name)+" does not have the permissions to use the `ban` command",inline=False)
+         await ctx.send(" ", embed=embed)
             
             
 @client.command(pass_content=True)   
@@ -235,7 +250,7 @@ async def mute(ctx, user: discord.Member):
           colour = discord.Colour.orange()
          ) 
          embed.set_author(name=" ")
-         embed.add_field(name=":x: User can not be muted", value=user+" has moderator permissions",inline=False)
+         embed.add_field(name=":x: User can not be muted", value=str(user.name)+" has moderator permissions",inline=False)
          await ctx.send(" ", embed=embed)
     else:
       if ctx.message.author.guild_permissions.kick_members:
@@ -243,6 +258,13 @@ async def mute(ctx, user: discord.Member):
          role = discord.utils.get(server.roles, name="Muted")
          await ctx.send(str(user.name)+" has been muted")
          await user.add_roles(role)
+      else:
+         embed = discord.Embed(
+          colour = discord.Colour.orange()
+         ) 
+         embed.set_author(name=" ")
+         embed.add_field(name=":x: Lack of permissions", value=str(ctx.message.author.name)+" does not have the permissions to use the `mute` command",inline=False)
+         await ctx.send(" ", embed=embed)
      
 @client.command()
 async def lock(ctx):
@@ -250,6 +272,13 @@ async def lock(ctx):
     await ctx.send("This channel will be locked until the command /unlock is used")
     rolesearch = discord.utils.get(ctx.message.guild.roles, name="Community")
     await ctx.message.channel.set_permissions(rolesearch, send_messages=False)
+   else:
+         embed = discord.Embed(
+          colour = discord.Colour.orange()
+         ) 
+         embed.set_author(name=" ")
+         embed.add_field(name=":x: Lack of permissions", value=str(ctx.message.author.name)+" does not have the permissions to use the `lock` command",inline=False)
+         await ctx.send(" ", embed=embed)
     
 @client.command()
 async def unlock(ctx):
@@ -257,6 +286,13 @@ async def unlock(ctx):
     await ctx.send("This channel will be unlocked until the command /lock is used")
     rolesearch = discord.utils.get(ctx.message.guild.roles, name="Community")
     await ctx.message.channel.set_permissions(rolesearch, send_messages=True)
+   else:
+         embed = discord.Embed(
+          colour = discord.Colour.orange()
+         ) 
+         embed.set_author(name=" ")
+         embed.add_field(name=":x: Lack of permissions", value=str(ctx.message.author.name)+" does not have the permissions to use the `unlock` command",inline=False)
+         await ctx.send(" ", embed=embed)
      
 @client.command(pass_content=True)   
 async def unmute(ctx, user: discord.Member):
@@ -265,7 +301,7 @@ async def unmute(ctx, user: discord.Member):
           colour = discord.Colour.orange()
          ) 
          embed.set_author(name=" ")
-         embed.add_field(name=":x: User can not be muted", value=user+" has moderator permissions",inline=False)
+         embed.add_field(name=":x: User can not be muted", value=str(user.name)+" has moderator permissions",inline=False)
          await ctx.send(" ", embed=embed)
     else:
         if ctx.message.author.guild_permissions.kick_members:
