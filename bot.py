@@ -28,7 +28,7 @@ async def status_task():
           server = discord.utils.get(client.guilds, name='Elemental Soul')
           role = discord.utils.get(server.roles, name="@everyone")
           channel = discord.utils.get(server.channels, name="qotd")
-          channel2 = discord.utils.get(server.channels, name="self-assign-roles")
+          channel2 = discord.utils.get(server.channels, name="es-bot-manual")
           await channel.send(str(role.mention)+" "+QOTD+" Don't like pings? Go to "+str(channel2.mention))
           QOTD = "None"
         
@@ -84,7 +84,7 @@ async def roasts(ctx):
     
 @client.command()
 async def version(ctx):
-    await ctx.send("Elemental Soul Bot v.15 by >Fire.Exe")
+    await ctx.send("Elemental Soul Bot v.1.6 by >Fire.Exe")
 
 @client.command()
 async def rolecount(ctx,role):
@@ -158,7 +158,16 @@ async def assign(ctx, left: str):
         elif left  == "qotdping":
           await ctx.send("You will now receive QOTD pings " + str( user.name))
           await user.add_roles(role)
-            
+        elif left  == "sneakping":
+          await ctx.send("You will now receive sneak peak pings " + str( user.name))
+          await user.add_roles(role)
+        else:
+         embed = discord.Embed(
+          colour = discord.Colour.orange()
+         ) 
+          embed.set_author(name=" ")
+          embed.add_field(name=":x: Invalid role: ", value="'"left+"' is an invalid role",inline=False)
+          await ctx.send(" ", embed=embed)
      
 @client.command(pass_content=True)
 async def unassign(ctx, left: str):
@@ -172,9 +181,26 @@ async def unassign(ctx, left: str):
         elif left  == "qotdping":
           await ctx.send("You will no longer receive QOTD pings " + str( user.name))
           await user.remove_roles(role)
-    
+        elif left  == "sneakping":
+          await ctx.send("You will no longer receive sneak peak pings " + str( user.name))
+          await user.remove_roles(role)
+        else:
+         embed = discord.Embed(
+          colour = discord.Colour.orange()
+         ) 
+          embed.set_author(name=" ")
+          embed.add_field(name=":x: Invalid role: ", value="'"left+"' is an invalid role",inline=False)
+          await ctx.send(" ", embed=embed)
 @client.command(pass_content=True)
 async def kick(ctx, user: discord.Member):
+    if user.guild_permissions.kick_members:
+         embed = discord.Embed(
+          colour = discord.Colour.orange()
+         ) 
+          embed.set_author(name=" ")
+          embed.add_field(name=":x: User can not be kicked", value=user+" has moderator permissions",inline=False)
+          await ctx.send(" ", embed=embed)
+     else:
         if ctx.message.author.guild_permissions.kick_members:
          await ctx.send(str(user.name)+" has been kicked")
          await user.kick()
@@ -189,6 +215,14 @@ async def qotd(ctx, *, qotd):
         
 @client.command(pass_content=True)
 async def ban(ctx, user: discord.Member):
+    if user.guild_permissions.kick_members:
+         embed = discord.Embed(
+          colour = discord.Colour.orange()
+         ) 
+          embed.set_author(name=" ")
+          embed.add_field(name=":x: User can not be banned", value=user+" has moderator permissions",inline=False)
+          await ctx.send(" ", embed=embed)
+     else:
         if ctx.message.author.guild_permissions.ban_members:
          await ctx.send(str(user.name)+" has been banned")
          await user.ban()
@@ -196,7 +230,15 @@ async def ban(ctx, user: discord.Member):
             
 @client.command(pass_content=True)   
 async def mute(ctx, user: discord.Member):
-        if ctx.message.author.guild_permissions.kick_members:
+    if user.guild_permissions.kick_members:
+         embed = discord.Embed(
+          colour = discord.Colour.orange()
+         ) 
+          embed.set_author(name=" ")
+          embed.add_field(name=":x: User can not be muted", value=user+" has moderator permissions",inline=False)
+          await ctx.send(" ", embed=embed)
+     else:
+      if ctx.message.author.guild_permissions.kick_members:
          server = ctx.message.guild
          role = discord.utils.get(server.roles, name="Muted")
          await ctx.send(str(user.name)+" has been muted")
@@ -218,6 +260,14 @@ async def unlock(ctx):
      
 @client.command(pass_content=True)   
 async def unmute(ctx, user: discord.Member):
+    if user.guild_permissions.kick_members:
+         embed = discord.Embed(
+          colour = discord.Colour.orange()
+         ) 
+          embed.set_author(name=" ")
+          embed.add_field(name=":x: User can not be muted", value=user+" has moderator permissions",inline=False)
+          await ctx.send(" ", embed=embed)
+     else:
         if ctx.message.author.guild_permissions.kick_members:
          server = ctx.message.guild
          role = discord.utils.get(server.roles, name="Muted")
@@ -225,7 +275,8 @@ async def unmute(ctx, user: discord.Member):
          await user.remove_roles(role)
             
 @client.command(pass_content=True)   
-async def roleall(ctx, left: str):
+async def roleall(ctx, left: str = None):
+      if left:
         if ctx.message.author.guild_permissions.ban_members:
          server = ctx.message.guild
          role = discord.utils.get(server.roles, name=left)
@@ -234,6 +285,13 @@ async def roleall(ctx, left: str):
          for member in x:
             await member.add_roles(role)
          await ctx.send(""+str(ctx.message.author.mention)+" I've roled everyone :+1:")
+      else:
+        embed = discord.Embed(
+          colour = discord.Colour.orange()
+         ) 
+          embed.set_author(name=" ")
+          embed.add_field(name=":x: Invalid role: ", value="'"left+"' is an invalid role",inline=False)
+          await ctx.send(" ", embed=embed)
         
         
 @client.command(pass_content=True)
@@ -244,6 +302,7 @@ async def help(ctx):
   
  embed.set_author(name="Help")
  embed.add_field(name="/help", value="Shows this message",inline=False)
+ embed.add_field(name="/modhelp", value="Shows moderation commands",inline=False)
  embed.add_field(name="/roasts", value="Get roasted",inline=False)
  embed.add_field(name="/blackjack", value="Play some blackjack",inline=False)
  embed.add_field(name="/group", value="Get the group link",inline=False)
@@ -253,13 +312,30 @@ async def help(ctx):
  embed.add_field(name="/unassign", value="Remove a role from yourself",inline=False)
  embed.add_field(name="Example:", value="/unassign QOTDping",inline=True)
  embed.add_field(name="/membercount", value="Shows the amount of people in the server",inline=False)
- embed.add_field(name="/kick", value="Kick a user",inline=True)
- embed.add_field(name="Example:", value="/kick YourDad",inline=True)
- embed.add_field(name="/ban", value="Ban a user",inline=False)
- embed.add_field(name="Example:", value="/ban YourDad",inline=True)
- embed.add_field(name="/lock", value="Locks the channel the command was used in",inline=False)
- embed.add_field(name="/unlock", value="Unlocks the channel the command was useed in",inline=False)
+ embed.add_field(name="/donate", value="Donate to the game",inline=False)
  await ctx.send("Here's all the commands and their uses:", embed=embed)
+    
+    
+@client.command(pass_content=True)
+async def modhelp(ctx):
+ embed = discord.Embed(
+        colour = discord.Colour.orange()
+ )
+  
+ embed.set_author(name="Help")
+ embed.add_field(name="/modhelp", value="Shows this message",inline=False)
+ embed.add_field(name="/kick", value="Kick a user",inline=True)
+ embed.add_field(name="Example:", value="/kick Hstist",inline=True)
+ embed.add_field(name="/ban", value="Ban a user",inline=False)
+ embed.add_field(name="Example:", value="/ban Hstist",inline=True)
+ embed.add_field(name="/lock", value="Locks the channel the command was used in",inline=False)
+ embed.add_field(name="/unlock", value="Unlocks the channel the command was used in",inline=False)
+ embed.add_field(name="/lockserver", value="Locks or unlocks the server depending on it's current state",inline=False) 
+ embed.add_field(name="/mute", value="Mutes the chosen user",inline=True)
+ embed.add_field(name="Example:", value="/mute Hstist",inline=True)
+ embed.add_field(name="/unmute", value="Unmutes the chosen user",inline=True)
+ embed.add_field(name="Example:", value="/unmute Hstist",inline=True)
+ await ctx.send("Here's all the moderation commands and their uses:", embed=embed)
         
     
 @client.command(pass_content=True)
