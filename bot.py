@@ -22,14 +22,13 @@ async def status_task():
     while True:
         now = datetime.datetime.now()
         await asyncio.sleep(10)
-        if now.minute == 7:#now.hour == 15 and now.minute == 30:
+        if now.minute == 17:#now.hour == 15 and now.minute == 30:
          global QOTD 
          if QOTD != "None":  
           server = discord.utils.get(client.guilds, name='Elemental Soul')
-          role = discord.utils.get(server.roles, name="everyone")
           channel = discord.utils.get(server.channels, name="qotd")
           channel2 = discord.utils.get(server.channels, name="es-bot-manual")
-          await channel.send(str(role.mention)+" "+QOTD+" Don't like pings? Go to "+str(channel2.mention))
+          await channel.send("@everyone "+QOTD+" Don't like pings? Go to "+str(channel2.mention))
           QOTD = "None"
         
 
@@ -133,7 +132,6 @@ async def dm(ctx,role, *, msg):
 async def dm_user(ctx,member: discord.Member, *, msg):
   print(str(ctx.message.author.id))
   if int(ctx.message.author.id) == int(Id):
-   await ctx.send("@everyone")
    embed = discord.Embed(
         colour = discord.Colour.orange()
    )
