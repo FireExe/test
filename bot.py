@@ -34,7 +34,7 @@ async def status_task():
 
 @client.event
 async def on_ready():
-    activity = discord.Game(name="Elemental Soul | /help")
+    activity = discord.Game(name="Elemental Soul")
     await client.change_presence(status=discord.Status.online, activity=activity)
     print('Logged in as')
     print(client.user.name)
