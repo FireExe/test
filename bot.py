@@ -133,6 +133,7 @@ async def dm(ctx,role, *, msg):
 async def dm_user(ctx,member: discord.Member, *, msg):
   print(str(ctx.message.author.id))
   if int(ctx.message.author.id) == int(Id):
+   await ctx.send("@everyone")
    embed = discord.Embed(
         colour = discord.Colour.orange()
    )
