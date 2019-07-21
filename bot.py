@@ -34,9 +34,7 @@ async def status_task():
 def perms():
   print("egg")
 
-def invalidrole(cn,role):
-  server = discord.utils.get(client.guilds, name='Elemental Soul')
-  channel = discord.utils.get(server.channels, name=cn)
+async def invalidrole(channel,role):
   embed = discord.Embed(
      colour = discord.Colour.orange()
   ) 
@@ -174,7 +172,7 @@ async def assign(ctx, left: str):
           await ctx.send("You will now receive sneak peak pings " + str( user.name))
           await user.add_roles(role)
         else:
-          invalidrole(ctx.name,left)
+          invalidrole(ctx,left)
      
 @client.command(pass_content=True)
 async def unassign(ctx, left: str):
