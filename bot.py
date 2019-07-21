@@ -30,7 +30,17 @@ async def status_task():
           channel2 = discord.utils.get(server.channels, name="es-bot-manual")
           await channel.send("@everyone "+QOTD+" Don't like pings? Go to "+str(channel2.mention))
           QOTD = "None"
-        
+#functions
+def perms():
+  
+def invalidrole(ctx,role):
+  embed = discord.Embed(
+     colour = discord.Colour.orange()
+   ) 
+  embed.set_author(name=" ")
+  embed.add_field(name=":x: Invalid role: ", value="'"+role+"' is an invalid role",inline=False)
+  await ctx.send(" ", embed=embed)  
+#main
 
 @client.event
 async def on_ready():
@@ -161,12 +171,7 @@ async def assign(ctx, left: str):
           await ctx.send("You will now receive sneak peak pings " + str( user.name))
           await user.add_roles(role)
         else:
-         embed = discord.Embed(
-          colour = discord.Colour.orange()
-         ) 
-         embed.set_author(name=" ")
-         embed.add_field(name=":x: Invalid role: ", value="'"+left+"' is an invalid role",inline=False)
-         await ctx.send(" ", embed=embed)
+          invalidrole(ctx,left)
      
 @client.command(pass_content=True)
 async def unassign(ctx, left: str):
