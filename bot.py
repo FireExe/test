@@ -54,6 +54,14 @@ async def noperms(ctx,command):
   embed.set_author(name=" ")
   embed.add_field(name=":x: Lack of permissions", value=str(ctx.message.author.name)+" does not have the permissions to use the `"+command+"` command",inline=False)
   await ctx.send(" ", embed=embed)
+    
+async def incorrect(ctx,correct):
+  embed = discord.Embed(
+   colour = discord.Colour.orange()
+  ) 
+  embed.set_author(name=" ")
+  embed.add_field(name=":x: Incorrect usage: ", value=correct,inline=False)
+  await ctx.send(" ", embed=embed)
 #main
 
 @client.event
@@ -227,34 +235,19 @@ async def qotd(ctx, *, qotd):
 @client.command(pass_content=True)
 async def ban(ctx, user: discord.Member):
     if user.guild_permissions.kick_members:
-         embed = discord.Embed(
-          colour = discord.Colour.orange()
-         ) 
-         embed.set_author(name=" ")
-         embed.add_field(name=":x: User can not be banned", value=str(user.name)+" has moderator permissions",inline=False)
-         await ctx.send(" ", embed=embed)
+     await hasperms(ctx,"banned",user)
     else:
         if ctx.message.author.guild_permissions.ban_members:
          await ctx.send(str(user.name)+" has been banned")
          await user.ban()
         else:
-         embed = discord.Embed(
-          colour = discord.Colour.orange()
-         ) 
-         embed.set_author(name=" ")
-         embed.add_field(name=":x: Lack of permissions", value=str(ctx.message.author.name)+" does not have the permissions to use the `ban` command",inline=False)
-         await ctx.send(" ", embed=embed)
+         await noperms(ctx,"ban")
             
             
 @client.command(pass_content=True)   
 async def mute(ctx, user: discord.Member):
     if user.guild_permissions.kick_members:
-         embed = discord.Embed(
-          colour = discord.Colour.orange()
-         ) 
-         embed.set_author(name=" ")
-         embed.add_field(name=":x: User can not be muted", value=str(user.name)+" has moderator permissions",inline=False)
-         await ctx.send(" ", embed=embed)
+        await hasperms(ctx,"muted",user)
     else:
       if ctx.message.author.guild_permissions.kick_members:
          server = ctx.message.guild
@@ -262,12 +255,7 @@ async def mute(ctx, user: discord.Member):
          await ctx.send(str(user.name)+" has been muted")
          await user.add_roles(role)
       else:
-         embed = discord.Embed(
-          colour = discord.Colour.orange()
-         ) 
-         embed.set_author(name=" ")
-         embed.add_field(name=":x: Lack of permissions", value=str(ctx.message.author.name)+" does not have the permissions to use the `mute` command",inline=False)
-         await ctx.send(" ", embed=embed)
+         await noperms(ctx,"mute")
      
 @client.command()
 async def lock(ctx):
@@ -276,12 +264,7 @@ async def lock(ctx):
     rolesearch = discord.utils.get(ctx.message.guild.roles, name="Community")
     await ctx.message.channel.set_permissions(rolesearch, send_messages=False)
    else:
-         embed = discord.Embed(
-          colour = discord.Colour.orange()
-         ) 
-         embed.set_author(name=" ")
-         embed.add_field(name=":x: Lack of permissions", value=str(ctx.message.author.name)+" does not have the permissions to use the `lock` command",inline=False)
-         await ctx.send(" ", embed=embed)
+      await noperms(ctx,"lock")
     
 @client.command()
 async def unlock(ctx):
@@ -290,22 +273,12 @@ async def unlock(ctx):
     rolesearch = discord.utils.get(ctx.message.guild.roles, name="Community")
     await ctx.message.channel.set_permissions(rolesearch, send_messages=True)
    else:
-         embed = discord.Embed(
-          colour = discord.Colour.orange()
-         ) 
-         embed.set_author(name=" ")
-         embed.add_field(name=":x: Lack of permissions", value=str(ctx.message.author.name)+" does not have the permissions to use the `unlock` command",inline=False)
-         await ctx.send(" ", embed=embed)
+      await noperms(ctx,"unlock")
      
 @client.command(pass_content=True)   
 async def unmute(ctx, user: discord.Member):
     if user.guild_permissions.kick_members:
-         embed = discord.Embed(
-          colour = discord.Colour.orange()
-         ) 
-         embed.set_author(name=" ")
-         embed.add_field(name=":x: User can not be muted", value=str(user.name)+" has moderator permissions",inline=False)
-         await ctx.send(" ", embed=embed)
+         await hasperms(ctx,"unmuted",user)
     else:
         if ctx.message.author.guild_permissions.kick_members:
          server = ctx.message.guild
@@ -319,12 +292,7 @@ async def roleall(ctx, left: str = None):
       if left:
         role = discord.utils.get(server.roles, name=left)
         if role == None:
-          embed = discord.Embed(
-           colour = discord.Colour.orange()
-          ) 
-          embed.set_author(name=" ")
-          embed.add_field(name=":x: Invalid role: ", value="'"+left+"' is an invalid role",inline=False)
-          await ctx.send(" ", embed=embed)  
+          await invalidrole(ctx,left)
         else:
          if ctx.message.author.guild_permissions.ban_members:
           await ctx.send("I'm gonna start giving everyone the "+left+" role and i'll notify you when i'm done :gear:")
@@ -333,12 +301,7 @@ async def roleall(ctx, left: str = None):
             await member.add_roles(role)
           await ctx.send(""+str(ctx.message.author.mention)+" I've roled everyone :+1:")
          else:
-          embed = discord.Embed(
-           colour = discord.Colour.orange()
-          ) 
-          embed.set_author(name=" ")
-          embed.add_field(name=":x: Incorrect usage: ", value="/roleall [role]",inline=False)
-          await ctx.send(" ", embed=embed)
+           await incorrect(ctx,"/roleall [role]")
         
         
 @client.command(pass_content=True)
@@ -427,9 +390,7 @@ async def donate(ctx, amount : int = None):
    embed.add_field(name=":x: Sorry", value="That donation is to small, 50 is the minimum",inline=False)
    await ctx.message.author.send(" ", embed=embed)
  else:
-  embed.set_author(name=" ")
-  embed.add_field(name=":x: Incorrect usage: ", value="/donate [amount]",inline=False)
-  await ctx.send(" ", embed=embed)
+   await incorrect(ctx,"/donate [amount]")
     
 @client.command(pass_content=True)
 async def winner(ctx, item : str , user : discord.Member):
@@ -459,12 +420,7 @@ async def lockserver(ctx,res : str = None):
         await ctx.send("The server will be locked until this command is used again")
     
  else:
-  embed = discord.Embed(
-        colour = discord.Colour.orange()
-  ) 
-  embed.set_author(name=" ")
-  embed.add_field(name=":x: Incorrect usage: ", value="/lockserver [reason]",inline=False)
-  await ctx.send(" ", embed=embed)
+   await incorrect(ctx,"/lockserver [reason]")
     
 @client.command(pass_content=True)
 async def group(ctx, amount : int = None):
@@ -485,22 +441,6 @@ async def trello(ctx, amount : int = None):
  embed.add_field(name="Trello", value="https://trello.com/b/8aprufdU/elemental-soul",inline=False)
  await ctx.message.author.send(" ", embed=embed)
     
-@client.command(pass_content=True)
-async def activegiveaway(ctx):
- embed = discord.Embed(
-        colour = discord.Colour.orange()
- )
- guild = ctx.message.guild
- channel =discord.utils.get(guild.channels, name="giveaways")
- embed.set_author(name=" ")
- embed.add_field(name="Test Giveaway", value="Giveaway ends in 10 seconds boi",inline=False)
- msg = await channel.send("React with :tada: to join the giveaway", embed=embed)
- await msg.add_reaction(emoji="🎉")
- global giveawaymessage
- giveawaymessage = msg
- await asyncio.sleep(10)
- giveawaymessage = "None"
- 
 @client.command(pass_content=True)
 async def blackjack(ctx): 
     playervalue = 0
@@ -583,19 +523,6 @@ async def blackjack(ctx):
     elif computervalue > 21:
         await ctx.send("I've bust so you win")
                                      
-        
-    
-@client.event
-async def on_reaction_add(reaction, user):
-   print("a reaction was added by")
-   if giveawaymessage != "None":
-    if reaction.message == giveawaymessage:
-        guild = ctx.message.guild
-        channel =discord.utils.get(guild.channels, name="giveaways")
-        channel.send(str(user.mention)+" has joined the active giveaway")
-        
-        
-        
 @client.event
 async def on_member_join(member):
     if lockdown == False:
