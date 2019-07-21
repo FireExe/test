@@ -31,7 +31,7 @@ async def status_task():
           await channel.send("@everyone "+QOTD+" Don't like pings? Go to "+str(channel2.mention))
           QOTD = "None"
 #functions
-def hasperms(effect,user):
+def hasperms(ctx,effect,user):
  embed = discord.Embed(
     colour = discord.Colour.orange()
  ) 
@@ -39,13 +39,13 @@ def hasperms(effect,user):
  embed.add_field(name=":x: User can not be "+effect, value=str(user.name)+" has moderator permissions",inline=False)
  await ctx.send(" ", embed=embed)
 
-async def invalidrole(channel,role):
+async def invalidrole(ctx,role):
   embed = discord.Embed(
      colour = discord.Colour.orange()
   ) 
   embed.set_author(name=" ")
   embed.add_field(name=":x: Invalid role: ", value="'"+role+"' is an invalid role",inline=False)
-  await channel.send(" ", embed=embed)  
+  await ctx.send(" ", embed=embed)  
     
 async def noperms(ctx,command):
   embed = discord.Embed(
@@ -107,7 +107,7 @@ async def roasts(ctx):
     
 @client.command()
 async def version(ctx):
-    await ctx.send("Elemental Soul Bot v.1.7 by >Fire.Exe")
+    await ctx.send("Elemental Soul Bot v.2.5 by >Fire.Exe")
 
 @client.command()
 async def rolecount(ctx,role):
@@ -207,7 +207,7 @@ async def unassign(ctx, left: str):
 @client.command(pass_content=True)
 async def kick(ctx, user: discord.Member):
     if user.guild_permissions.kick_members:
-      await hasperms("kicked",user)
+      await hasperms(ctx,"kicked",user)
     else:
         if ctx.message.author.guild_permissions.kick_members:
          await ctx.send(str(user.name)+" has been kicked")
