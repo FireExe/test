@@ -172,7 +172,7 @@ async def assign(ctx, left: str):
           await ctx.send("You will now receive sneak peak pings " + str( user.name))
           await user.add_roles(role)
         else:
-          invalidrole(ctx,left)
+          await invalidrole(ctx,left)
      
 @client.command(pass_content=True)
 async def unassign(ctx, left: str):
