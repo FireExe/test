@@ -178,10 +178,13 @@ async def square(ctx, num : int):
     
     
 @client.command(pass_content=True)
-async def assign(ctx, left: str):
+async def assign(ctx, left: str = None):
        user = ctx.message.author
        server = ctx.message.guild
        role = discord.utils.get(server.roles, name=left)
+       if left == None:
+        await incorrect(ctx,"/assign [role]")
+        return
        if ctx.message.channel.name != "general" and ctx.message.channel.name != "qotd-answers" and ctx.message.channel.name != "roasts" and ctx.message.channel.name != "memes": 
         if left  == "nopartnerpings":
           await ctx.send("You will no longer receive partner pings " + str( user.name))
@@ -196,10 +199,13 @@ async def assign(ctx, left: str):
           await invalidrole(ctx,left)
      
 @client.command(pass_content=True)
-async def unassign(ctx, left: str):
+async def unassign(ctx, left: str = None):
        user = ctx.message.author
        server = ctx.message.guild
        role = discord.utils.get(server.roles, name=left)
+       if left == None:
+        await incorrect(ctx,"/assign [role]")
+        return
        if ctx.message.channel.name != "general" and ctx.message.channel.name != "qotd-answers" and ctx.message.channel.name != "roasts" and ctx.message.channel.name != "memes":
         if left  == "nopartnerpings":
           await ctx.send("You will now recieve partner pings " + str( user.name))
