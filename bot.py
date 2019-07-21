@@ -279,7 +279,7 @@ async def unlock(ctx):
       await noperms(ctx,"unlock")
      
 @client.command(pass_content=True)   
-async def unmute(ctx, user: discord.Member):
+async def unmute(ctx, user: discord.Member = None):
         if ctx.message.author.guild_permissions.kick_members:
          server = ctx.message.guild
          role = discord.utils.get(server.roles, name="Muted")
