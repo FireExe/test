@@ -31,8 +31,13 @@ async def status_task():
           await channel.send("@everyone "+QOTD+" Don't like pings? Go to "+str(channel2.mention))
           QOTD = "None"
 #functions
-def perms():
-  print("egg")
+def hasperms(effect,user):
+ embed = discord.Embed(
+    colour = discord.Colour.orange()
+ ) 
+ embed.set_author(name=" ")
+ embed.add_field(name=":x: User can not be "+effect, value=str(user.name)+" has moderator permissions",inline=False)
+ await ctx.send(" ", embed=embed)
 
 async def invalidrole(channel,role):
   embed = discord.Embed(
@@ -41,6 +46,14 @@ async def invalidrole(channel,role):
   embed.set_author(name=" ")
   embed.add_field(name=":x: Invalid role: ", value="'"+role+"' is an invalid role",inline=False)
   await channel.send(" ", embed=embed)  
+    
+async def noperms(ctx,command):
+  embed = discord.Embed(
+     colour = discord.Colour.orange()
+  ) 
+  embed.set_author(name=" ")
+  embed.add_field(name=":x: Lack of permissions", value=str(ctx.message.author.name)+" does not have the permissions to use the `"+command+"` command",inline=False)
+  await ctx.send(" ", embed=embed)
 #main
 
 @client.event
@@ -190,32 +203,17 @@ async def unassign(ctx, left: str):
           await ctx.send("You will no longer receive sneak peak pings " + str( user.name))
           await user.remove_roles(role)
         else:
-         embed = discord.Embed(
-          colour = discord.Colour.orange()
-         ) 
-         embed.set_author(name=" ")
-         embed.add_field(name=":x: Invalid role: ", value="'"+left+"' is an invalid role",inline=False)
-         await ctx.send(" ", embed=embed)
+          await invalidrole(ctx,left)
 @client.command(pass_content=True)
 async def kick(ctx, user: discord.Member):
     if user.guild_permissions.kick_members:
-         embed = discord.Embed(
-          colour = discord.Colour.orange()
-         ) 
-         embed.set_author(name=" ")
-         embed.add_field(name=":x: User can not be kicked", value=str(user.name)+" has moderator permissions",inline=False)
-         await ctx.send(" ", embed=embed)
+      await hasperms("kicked",user)
     else:
         if ctx.message.author.guild_permissions.kick_members:
          await ctx.send(str(user.name)+" has been kicked")
          await user.kick()
         else:
-         embed = discord.Embed(
-          colour = discord.Colour.orange()
-         ) 
-         embed.set_author(name=" ")
-         embed.add_field(name=":x: Lack of permissions", value=str(ctx.message.author.name)+" does not have the permissions to use the `kick` command",inline=False)
-         await ctx.send(" ", embed=embed)
+          await noperms(ctx,"kick")
             
             
 @client.command(pass_content=True)      
