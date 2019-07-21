@@ -1,17 +1,11 @@
 import os, discord, random, datetime, time, asyncio, json, urllib
 from discord.ext.commands import Bot
-
-# We'll need to substitute the Prefix for an Enviroment Variable
 BOT_PREFIX = os.environ['prefix'] # -Prfix is need to declare a Command in discord ex: !pizza "!" being the Prefix
 TOKEN = os.environ['token'] # The token is also substituted for security reasons
 Id = os.environ['Id']
 
 client = Bot(command_prefix=BOT_PREFIX)
 client.remove_command("help")
-# this is an event which is triggered when something happens in Discord 
-# in this case on_ready() is called when the bot logs on
-#you can checkthe Discord API Documentaion for more event Functions 
-# here: https://discordapp.com/developers
 QOTD = "None"
 lockdown = False
 giveawaymessage = "None"
@@ -219,11 +213,14 @@ async def unassign(ctx, left: str = None):
         else:
           await invalidrole(ctx,left)
 @client.command(pass_content=True)
-async def kick(ctx, user: discord.Member):
-    if user.guild_permissions.kick_members:
-      await hasperms(ctx,"kicked",user)
-    else:
+async def kick(ctx, user: discord.Member = None):
         if ctx.message.author.guild_permissions.kick_members:
+         if user == None:
+          await incorrect(ctx,"/kick [user]")
+          return
+         if user.guild_permissions.kick_members:
+          await hasperms(ctx,"kicked",user)
+          return
          await ctx.send(str(user.name)+" has been kicked")
          await user.kick()
         else:
