@@ -31,7 +31,7 @@ async def status_task():
           await channel.send("@everyone "+QOTD+" Don't like pings? Go to "+str(channel2.mention))
           QOTD = "None"
 #functions
-def hasperms(ctx,effect,user):
+async def hasperms(ctx,effect,user):
  embed = discord.Embed(
     colour = discord.Colour.orange()
  ) 
