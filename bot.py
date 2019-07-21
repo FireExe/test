@@ -165,12 +165,6 @@ async def dm_user(ctx,member: discord.Member, *, msg):
    embed.add_field(name="Message from the void", value=msg,inline=False)
    await member.send(" ", embed=embed)
     
-@client.command()
-async def square(ctx, num : int):
-    await ctx.send(num*num)
-    await ctx.send(str(ctx.message.author))
-    
-    
 @client.command(pass_content=True)
 async def assign(ctx, left: str = None):
        user = ctx.message.author
@@ -236,11 +230,14 @@ async def qotd(ctx, *, qotd):
          QOTD = qotd
         
 @client.command(pass_content=True)
-async def ban(ctx, user: discord.Member):
-    if user.guild_permissions.kick_members:
-     await hasperms(ctx,"banned",user)
-    else:
+async def ban(ctx, user: discord.Member = None):
         if ctx.message.author.guild_permissions.ban_members:
+         if user == None:
+          await incorrect(ctx,"/ban [user]")
+          return
+         if user.guild_permissions.kick_members:
+          await hasperms(ctx,"banned",user)
+          return
          await ctx.send(str(user.name)+" has been banned")
          await user.ban()
         else:
@@ -248,13 +245,16 @@ async def ban(ctx, user: discord.Member):
             
             
 @client.command(pass_content=True)   
-async def mute(ctx, user: discord.Member):
-    if user.guild_permissions.kick_members:
-        await hasperms(ctx,"muted",user)
-    else:
+async def mute(ctx, user: discord.Member = None):
       if ctx.message.author.guild_permissions.kick_members:
          server = ctx.message.guild
          role = discord.utils.get(server.roles, name="Muted")
+         if user == None:
+          await incorrect(ctx,"/mute [user]")
+          return
+         if user.guild_permissions.kick_members:
+          await hasperms(ctx,"muted",user)
+          return
          await ctx.send(str(user.name)+" has been muted")
          await user.add_roles(role)
       else:
@@ -280,12 +280,15 @@ async def unlock(ctx):
      
 @client.command(pass_content=True)   
 async def unmute(ctx, user: discord.Member):
-    if user.guild_permissions.kick_members:
-         await hasperms(ctx,"unmuted",user)
-    else:
         if ctx.message.author.guild_permissions.kick_members:
          server = ctx.message.guild
          role = discord.utils.get(server.roles, name="Muted")
+         if user == None:
+          await incorrect(ctx,"/unmute [user]")
+          return
+         if user.guild_permissions.kick_members:
+          await hasperms(ctx,"unmuted",user)
+          return
          await ctx.send(str(user.name)+" has been unmuted")
          await user.remove_roles(role)
             
