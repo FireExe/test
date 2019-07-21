@@ -32,7 +32,8 @@ async def status_task():
           QOTD = "None"
 #functions
 def perms():
-  
+  print("egg")
+
 def invalidrole(ctx,role):
   embed = discord.Embed(
      colour = discord.Colour.orange()
