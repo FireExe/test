@@ -315,7 +315,6 @@ async def help(ctx):
  embed = discord.Embed(
         colour = discord.Colour.orange()
  )
-  
  embed.set_author(name="Help")
  embed.add_field(name="/help", value="Shows this message",inline=False)
  embed.add_field(name="/modhelp", value="Shows moderation commands",inline=False)
@@ -385,6 +384,7 @@ async def addrole(ctx,user : discord.Member = None, item : str = None):
     await incorrect(ctx,"/addrole [user] [role]")
     return
   else:
+   server = ctx.message.guild
    role = discord.utils.get(server.roles, name=item)
    if role == None:
      await invalidrole(ctx,item)
