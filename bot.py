@@ -369,47 +369,32 @@ async def membercount(ctx):
 
     
 @client.command(pass_content=True)
-async def donate(ctx, amount : int = None):
+async def donate(ctx):
  embed = discord.Embed(
         colour = discord.Colour.orange()
  )
- num = 0
- if amount:
-  if  amount > 999: 
-   embed.set_author(name=" ")
-   embed.add_field(name="Large donations ", value="https://www.roblox.com/catalog/2693098576/Large-Donations",inline=False)
-   await ctx.message.author.send(" ", embed=embed)
-  elif amount > 499: 
-   embed.set_author(name=" ")
-   embed.add_field(name="Medium donations ", value="https://www.roblox.com/catalog/2693097087/Medium-Donations",inline=False)
-   await ctx.message.author.send(" ", embed=embed)
-  elif amount > 99: 
-   embed.set_author(name=" ")
-   embed.add_field(name="Small donations ", value="https://www.roblox.com/catalog/2693095047/Small-Donations",inline=False)
-   await ctx.message.author.send(" ", embed=embed)
-  elif amount > 49:
-   embed.set_author(name=" ")
-   embed.add_field(name="Micro donations ", value="https://www.roblox.com/catalog/2693093169/Micro-Donation",inline=False)
-   await ctx.message.author.send(" ", embed=embed)
-  else:
-   embed.set_author(name=" ")
-   embed.add_field(name=":x: Sorry", value="That donation is to small, 50 is the minimum",inline=False)
-   await ctx.message.author.send(" ", embed=embed)
- else:
-   await incorrect(ctx,"/donate [amount]")
+ embed.set_author(name=" ")
+ embed.add_field(name="Donations ", value="https://www.roblox.com/game-pass/6930348/Donation",inline=False)
+ await ctx.message.author.send(" ", embed=embed)
+
     
 @client.command(pass_content=True)
-async def winner(ctx, item : str , user : discord.Member):
+async def addrole(ctx,user : discord.Member = None, item : str = None):
  if ctx.message.author.guild_permissions.ban_members:
-  embed = discord.Embed(
-        colour = discord.Colour.orange()
-  )
-  server = discord.utils.get(client.guilds, name='Bot making')
-  channel = discord.utils.get(server.channels, name="weapon-winner-log")  
-  embed.set_author(name=" ")
-  embed.add_field(name="Added", value= str(user)+" has been added to the list of winners and their item won is the "+item,inline=False)
   await ctx.send(" ", embed=embed)
   await channel.send(" ", embed=embed)
+  if user == None or item == None:
+    await incorrect(ctx,"/addrole [user] [role]")
+    return
+  else:
+   role = discord.utils.get(server.roles, name=item)
+   if role == None:
+     await invalidrole(ctx,item)
+     return
+   await ctx.send(str(user.name)+" has been given the "+item+" role")
+   await user.add_roles(role)
+ else:
+   await noperms(ctx,"addrole")
 
 @client.command(pass_content=True)
 async def lockserver(ctx,res : str = None):
