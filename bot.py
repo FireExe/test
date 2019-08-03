@@ -378,7 +378,7 @@ async def donate(ctx):
 
     
 @client.command(pass_content=True)
-async def addrole(ctx,user : discord.Member = None, item : str = None):
+async def addrole(ctx,user : discord.Member = None, *,item : str = None):
  if ctx.message.author.guild_permissions.ban_members:
   if user == None or item == None:
     await incorrect(ctx,"/addrole [user] [role]")
@@ -395,7 +395,7 @@ async def addrole(ctx,user : discord.Member = None, item : str = None):
    await noperms(ctx,"addrole")
 
 @client.command(pass_content=True)
-async def removerole(ctx,user : discord.Member = None, item : str = None):
+async def removerole(ctx,user : discord.Member = None, *, item : str = None):
  if ctx.message.author.guild_permissions.ban_members:
   if user == None or item == None:
     await incorrect(ctx,"/removerole [user] [role]")
