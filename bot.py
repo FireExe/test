@@ -381,8 +381,6 @@ async def donate(ctx):
 @client.command(pass_content=True)
 async def addrole(ctx,user : discord.Member = None, item : str = None):
  if ctx.message.author.guild_permissions.ban_members:
-  await ctx.send(" ", embed=embed)
-  await channel.send(" ", embed=embed)
   if user == None or item == None:
     await incorrect(ctx,"/addrole [user] [role]")
     return
