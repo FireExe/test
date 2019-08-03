@@ -395,6 +395,23 @@ async def addrole(ctx,user : discord.Member = None, item : str = None):
    await noperms(ctx,"addrole")
 
 @client.command(pass_content=True)
+async def removerole(ctx,user : discord.Member = None, item : str = None):
+ if ctx.message.author.guild_permissions.ban_members:
+  if user == None or item == None:
+    await incorrect(ctx,"/removerole [user] [role]")
+    return
+  else:
+   server = ctx.message.guild
+   role = discord.utils.get(server.roles, name=item)
+   if role == None:
+     await invalidrole(ctx,item)
+     return
+   await ctx.send(str(user.name)+" has lost the "+item+" role")
+   await user.remove_roles(role)
+ else:
+   await noperms(ctx,"removerole")
+
+@client.command(pass_content=True)
 async def lockserver(ctx,res : str = None):
  if res:
   if ctx.message.author.guild_permissions.ban_members:  
