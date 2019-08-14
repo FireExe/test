@@ -346,7 +346,7 @@ async def modhelp(ctx):
  embed.add_field(name="/modhelp", value="Shows this message",inline=False)
  embed.add_field(name="/kick", value="Kick a user",inline=True)
  embed.add_field(name="Example:", value="/kick Hstist",inline=True)
- embed.add_field(name="/ban", value="Ban a user",inline=False)
+ embed.add_field(name="/ban", value="Ban a user",inline=True)
  embed.add_field(name="Example:", value="/ban Hstist",inline=True)
  embed.add_field(name="/lock", value="Locks the channel the command was used in",inline=False)
  embed.add_field(name="/unlock", value="Unlocks the channel the command was used in",inline=False)
