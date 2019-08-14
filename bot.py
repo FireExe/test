@@ -228,12 +228,17 @@ async def kick(ctx, user: discord.Member = None):
             
             
 @client.command(pass_content=True)      
-async def qotd(ctx, *, qotd):
+async def qotd(ctx, *, qotd = None):
         if ctx.message.author.guild_permissions.ban_members:
+         if qotd == None:
+            await incorrect(ctx,"/qotd [a question of your choice]")
+            return
          user = ctx.message.author
          await ctx.send(str(user.name)+" has set the qotd to "+qotd)
          global QOTD 
          QOTD = qotd
+        else:
+          await noperms(ctx,"qotd")  
         
 @client.command(pass_content=True)
 async def ban(ctx, user: discord.Member = None):
@@ -328,10 +333,8 @@ async def help(ctx):
  embed.add_field(name="/blackjack", value="Play some blackjack",inline=False)
  embed.add_field(name="/group", value="Get the group link",inline=False)
  embed.add_field(name="/version", value="Checks my version",inline=False)
- embed.add_field(name="/assign", value="Give yourself a role",inline=True)
- embed.add_field(name="Example:", value="/assign QOTDping",inline=True)
+ embed.add_field(name="/assign", value="Give yourself a role",inline=False)
  embed.add_field(name="/unassign", value="Remove a role from yourself",inline=False)
- embed.add_field(name="Example:", value="/unassign QOTDping",inline=True)
  embed.add_field(name="/membercount", value="Shows the amount of people in the server",inline=False)
  embed.add_field(name="/donate", value="Donate to the game",inline=False)
  await ctx.send("Here's all the commands and their uses:", embed=embed)
@@ -344,23 +347,16 @@ async def modhelp(ctx):
  )
  embed.set_author(name="Moderator Help")
  embed.add_field(name="/modhelp", value="Shows this message",inline=False)
- embed.add_field(name="/kick", value="Kick a user",inline=True)
- embed.add_field(name="Example:", value="/kick Hstist",inline=True)
- embed.add_field(name="/ban", value="Ban a user",inline=True)
- embed.add_field(name="Example:", value="/ban Hstist",inline=True)
+ embed.add_field(name="/kick", value="Kick a user",inline=False)
+ embed.add_field(name="/ban", value="Ban a user",inline=False)
  embed.add_field(name="/lock", value="Locks the channel the command was used in",inline=False)
- embed.add_field(name="/unlock", value="Unlocks the channel the command was used in",inline=False)
+ embed.add_field(name="/unlock", value="Unlocks the channel the command was used in",inline=False) 
  embed.add_field(name="/lockserver", value="Locks or unlocks the server depending on it's current state",inline=False) 
- embed.add_field(name="/mute", value="Mutes the chosen user",inline=True)
- embed.add_field(name="Example:", value="/mute Hstist",inline=True)
+ embed.add_field(name="/mute", value="Mutes the chosen user",inline=False)
  embed.add_field(name="/unmute", value="Unmutes the chosen user",inline=False)
- embed.add_field(name="Example:", value="/unmute Hstist",inline=True)
  embed.add_field(name="/addrole", value="Gives a user the chosen role",inline=False)
- embed.add_field(name="Example:", value="/addrole Hstist Tester",inline=True)
  embed.add_field(name="/removerole", value="Removes the chosen role from the user",inline=False)
- embed.add_field(name="Example:", value="/removerole Hstist Tester",inline=True)
- embed.add_field(name="/qotd", value="sets the qotd for the bot to say at 3:30 GMT",inline=False)
- embed.add_field(name="Example:", value="/qotd Is this server really dead?",inline=True)
+ embed.add_field(name="/qotd", value="sets the qotd for the bot to say at 3:30 pm GMT",inline=False)
  await ctx.send("Here's all the moderation commands and their uses:", embed=embed)
         
     
@@ -425,8 +421,10 @@ async def removerole(ctx,user : discord.Member = None, *, item : str = None):
 
 @client.command(pass_content=True)
 async def lockserver(ctx,res : str = None):
- if res:
   if ctx.message.author.guild_permissions.ban_members:  
+    if res == None:
+     await incorrect(ctx,"/lockserver [reason]")
+     return
     global reason
     global lockdown
     reason = res
@@ -436,9 +434,9 @@ async def lockserver(ctx,res : str = None):
     else:
         lockdown = True
         await ctx.send("The server will be locked until this command is used again")
-    
- else:
-   await incorrect(ctx,"/lockserver [reason]")
+  else:
+    await noperms(ctx,"lockserver")
+
     
 @client.command(pass_content=True)
 async def group(ctx, amount : int = None):
