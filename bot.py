@@ -183,6 +183,9 @@ async def assign(ctx, left: str = None):
         elif left  == "sneakping":
           await ctx.send("You will now receive sneak peak pings " + str( user.name))
           await user.add_roles(role)
+        elif left  == "giveawayping":
+          await ctx.send("You will now receive giveaway pings " + str( user.name))
+          await user.add_roles(role)
         else:
           await invalidrole(ctx,left)
      
@@ -203,6 +206,9 @@ async def unassign(ctx, left: str = None):
           await user.remove_roles(role)
         elif left  == "sneakping":
           await ctx.send("You will no longer receive sneak peak pings " + str( user.name))
+          await user.remove_roles(role)
+        elif left  == "giveawayping":
+          await ctx.send("You will no longer receive giveaway pings " + str( user.name))
           await user.remove_roles(role)
         else:
           await invalidrole(ctx,left)
@@ -347,8 +353,14 @@ async def modhelp(ctx):
  embed.add_field(name="/lockserver", value="Locks or unlocks the server depending on it's current state",inline=False) 
  embed.add_field(name="/mute", value="Mutes the chosen user",inline=True)
  embed.add_field(name="Example:", value="/mute Hstist",inline=True)
- embed.add_field(name="/unmute", value="Unmutes the chosen user",inline=True)
+ embed.add_field(name="/unmute", value="Unmutes the chosen user",inline=False)
  embed.add_field(name="Example:", value="/unmute Hstist",inline=True)
+ embed.add_field(name="/addrole", value="Gives a user the chosen role",inline=False)
+ embed.add_field(name="Example:", value="/addrole Hstist Tester",inline=True)
+ embed.add_field(name="/removerole", value="Removes the chosen role from the user",inline=False)
+ embed.add_field(name="Example:", value="/removerole Hstist Tester",inline=True)
+ embed.add_field(name="/qotd", value="sets the qotd for the bot to say at 3:30 GMT",inline=False)
+ embed.add_field(name="Example:", value="/qotd Is this server really dead?",inline=True)
  await ctx.send("Here's all the moderation commands and their uses:", embed=embed)
         
     
@@ -436,6 +448,7 @@ async def group(ctx, amount : int = None):
  embed.set_author(name=" ")
  embed.add_field(name="Group", value="https://www.roblox.com/My/Groups.aspx?gid=4622364",inline=False)
  await ctx.message.author.send(" ", embed=embed)
+ await ctx.send("I've sent you a dm with the link")
    
 
 @client.command(pass_content=True)
@@ -446,6 +459,7 @@ async def trello(ctx, amount : int = None):
  embed.set_author(name=" ")
  embed.add_field(name="Trello", value="https://trello.com/b/8aprufdU/elemental-soul",inline=False)
  await ctx.message.author.send(" ", embed=embed)
+ await ctx.send("I've sent you a dm with the link")
     
 @client.command(pass_content=True)
 async def blackjack(ctx): 
