@@ -72,10 +72,16 @@ async def on_ready():
      colour = discord.Colour.orange()
     ) 
     embed.set_author(name="Role Reactions ")
-    embed.add_field(name="How to use :", value="react with a reaction corresponding to a role to gain it and remove the reaction to remove it ",inline=False)
+    embed.add_field(name="How to use :", value="React with a reaction corresponding to a role to gain the role and remove the reaction to remove the role ",inline=False)
     embed.add_field(name="For no partner pings react with: ",value="📥",inline=False)
+    embed.add_field(name="For no giveway pings react with: ",value="🎁",inline=False)
+    embed.add_field(name="For no sneak peek pings react with: ",value="👀",inline=False)
+    embed.add_field(name="For no qotd pings react with: ",value="❓",inline=False)
     message = await channel.send(" ", embed=embed)
     await message.add_reaction("📥")
+    await message.add_reaction("🎁")
+    await message.add_reaction("👀")
+    await message.add_reaction("❓")
     client.loop.create_task(status_task())
     
     
