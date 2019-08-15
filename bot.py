@@ -69,7 +69,7 @@ async def on_ready():
     server = discord.utils.get(client.guilds, name='Bot making')
     channel = discord.utils.get(server.channels, name="remove-pings")
     message = await channel.send("React bois")
-    await client.add_reaction(message, emoji=📥)
+    await client.add_reaction(message, emoji="inbox_tray")
     client.loop.create_task(status_task())
     
     
