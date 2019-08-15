@@ -68,6 +68,7 @@ async def on_ready():
     print('------')
     server = discord.utils.get(client.guilds, name='Bot making')
     channel = discord.utils.get(server.channels, name="remove-pings")
+    channel.purge(limit=2)
     embed = discord.Embed(
      colour = discord.Colour.orange()
     ) 
@@ -606,7 +607,33 @@ async def on_reaction_add(reaction,user):
     if reaction.emoji == "📥":
       role = discord.utils.get(server.roles, name="nopartnerpings")  
       await user.add_roles(role)
+    elif reaction.emoji == "👀":
+      role = discord.utils.get(server.roles, name="sneakping")  
+      await user.add_roles(role)
+    elif reaction.emoji == "🎁":
+      role = discord.utils.get(server.roles, name="giveawayping")  
+      await user.add_roles(role)
+    elif reaction.emoji == "❓":
+      role = discord.utils.get(server.roles, name="qotdpings")  
+      await user.add_roles(role)
         
+@client.event
+async def on_reaction_remove(reaction,user):
+   server = discord.utils.get(client.guilds, name='Bot making')
+   channel = discord.utils.get(server.channels, name="remove-pings")
+   if reaction.message.channel == channel:
+    if reaction.emoji == "📥":
+      role = discord.utils.get(server.roles, name="nopartnerpings")  
+      await user.remove_roles(role)
+    elif reaction.emoji == "👀":
+      role = discord.utils.get(server.roles, name="sneakping")  
+      await user.remove_roles(role)
+    elif reaction.emoji == "🎁":
+      role = discord.utils.get(server.roles, name="giveawayping")  
+      await user.remove_roles(role)
+    elif reaction.emoji == "❓":
+      role = discord.utils.get(server.roles, name="qotdpings")  
+      await user.remove_roles(role)
         
 @client.event
 async def on_message(message):
