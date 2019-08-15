@@ -11,6 +11,7 @@ lockdown = False
 giveawaymessage = "None"
 reason = ""
 Spam = []
+version =  "0.53"
 
 async def status_task():
     while True:
@@ -68,6 +69,8 @@ async def on_ready():
     print('------')
     server = discord.utils.get(client.guilds, name='Elemental Soul')
     channel = discord.utils.get(server.channels, name="remove-pings")
+    channel2 = discord.utils.get(server.channels, name="general")
+    await chaannel2.send("Just received an update my version is now "+version)
     await channel.purge(limit=2)
     embed = discord.Embed(
      colour = discord.Colour.orange()
@@ -122,11 +125,6 @@ async def roasts(ctx):
    else:
     channel = discord.utils.get(ctx.message.guild.channels, name="roasts")
     await ctx.send("I only do roasts in "+str(channel.mention))
-
-    
-@client.command()
-async def version(ctx):
-    await ctx.send("Elemental Soul Bot v.2.5 by >Fire.Exe")
 
 @client.command()
 async def rolecount(ctx,role):
@@ -349,11 +347,11 @@ async def help(ctx):
  embed.add_field(name="/roasts", value="Get roasted",inline=False)
  embed.add_field(name="/blackjack", value="Play some blackjack",inline=False)
  embed.add_field(name="/group", value="Get the group link",inline=False)
- embed.add_field(name="/version", value="Checks my version",inline=False)
  embed.add_field(name="/assign", value="Give yourself a role",inline=False)
  embed.add_field(name="/unassign", value="Remove a role from yourself",inline=False)
  embed.add_field(name="/membercount", value="Shows the amount of people in the server",inline=False)
  embed.add_field(name="/donate", value="Donate to the game",inline=False)
+ embed.add_field(name="Credits:", value="Elemental Soul Bot is made by >Fire.Exe",inline=False)
  await ctx.send("Here's all the commands and their uses:", embed=embed)
     
     
