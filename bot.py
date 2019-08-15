@@ -68,7 +68,7 @@ async def on_ready():
     print('------')
     server = discord.utils.get(client.guilds, name='Bot making')
     channel = discord.utils.get(server.channels, name="remove-pings")
-    channel.purge(limit=2)
+    await channel.purge(limit=2)
     embed = discord.Embed(
      colour = discord.Colour.orange()
     ) 
