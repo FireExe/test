@@ -73,7 +73,7 @@ async def on_ready():
     ) 
     embed.set_author(name="Role Reactions ")
     embed.add_field(name="How to use :", value="react with a reaction corresponding to a role to gain it and remove the reaction to remove it ",inline=False)
-    embed.add_field(name="For no partner pings react with: ","📥",inline=False)
+    embed.add_field(name="For no partner pings react with: ",value="📥",inline=False)
     message = await ctx.send(" ", embed=embed)
     await message.add_reaction("📥")
     client.loop.create_task(status_task())
