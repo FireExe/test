@@ -70,7 +70,7 @@ async def on_ready():
     server = discord.utils.get(client.guilds, name='Elemental Soul')
     channel = discord.utils.get(server.channels, name="remove-pings")
     channel2 = discord.utils.get(server.channels, name="general")
-    await chaannel2.send("Just received an update my version is now "+version)
+    await channel2.send("Just received an update my version is now "+version)
     await channel.purge(limit=2)
     embed = discord.Embed(
      colour = discord.Colour.orange()
