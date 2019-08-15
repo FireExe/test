@@ -66,7 +66,7 @@ async def on_ready():
     print(client.user.name)
     print(client.user.id)
     print('------')
-    server = discord.utils.get(client.guilds, name='Bot making')
+    server = discord.utils.get(client.guilds, name='Elemental Soul')
     channel = discord.utils.get(server.channels, name="remove-pings")
     await channel.purge(limit=2)
     embed = discord.Embed(
@@ -565,6 +565,7 @@ async def on_member_join(member):
      channel = discord.utils.get(member.guild.channels, name="welcome")
      role = discord.utils.get(member.guild.roles, name="qotdping")
      role2 = discord.utils.get(member.guild.roles, name="sneakping")
+     role3 = discord.utils.get(member.guild.roles, name="giveawayping")
      channel2 = discord.utils.get(member.guild.channels, name="faqs")
      channel3 = discord.utils.get(member.guild.channels, name="es-bot-manual")
      channel4 = discord.utils.get(member.guild.channels, name="log")
@@ -572,6 +573,7 @@ async def on_member_join(member):
      await channel4.send(":inbox_tray:**"+str(member)+"**"+" (ID:"+str(member.id)+") has joined server at "+str(now.hour)+":"+str(now.minute)+":"+str(now.second)+" GMT on the "+str(now.day)+"/"+str(now.month)+"/"+str(now.year))
      await member.add_roles(role)
      await member.add_roles(role2)
+     await member.add_roles(role3)
     else:
      await member.send("We're currently under lock down because "+reason)
      await member.kick()
@@ -601,7 +603,7 @@ async def on_message_delete(before):
 
 @client.event
 async def on_reaction_add(reaction,user):
-   server = discord.utils.get(client.guilds, name='Bot making')
+   server = discord.utils.get(client.guilds, name='Elemental Soul')
    channel = discord.utils.get(server.channels, name="remove-pings")
    if reaction.message.channel == channel:
     if reaction.emoji == "📥":
@@ -623,7 +625,7 @@ async def on_reaction_add(reaction,user):
         
 @client.event
 async def on_reaction_remove(reaction,user):
-   server = discord.utils.get(client.guilds, name='Bot making')
+   server = discord.utils.get(client.guilds, name='Elemental Soul')
    channel = discord.utils.get(server.channels, name="remove-pings")
    if reaction.message.channel == channel:
     if reaction.emoji == "📥":
