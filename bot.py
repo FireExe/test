@@ -599,6 +599,16 @@ async def on_message_delete(before):
     await channel.send(""+str(now.hour)+":"+str(now.minute)+":"+str(now.second)+" :x:**"+str(before.author)+"**"+" (ID:"+str(before.author.id)+")'s has been deleted from "+str(channel2.mention)+":", embed=embed)
 
 @client.event
+async def on_reaction_add(reaction,user):
+   server = discord.utils.get(client.guilds, name='Bot making')
+   channel = discord.utils.get(server.channels, name="remove-pings")
+   if reaction.message.channel == channel:
+    if reaction.emoji == "📥":
+      role = discord.utils.get(server.roles, name="nopartnerpings")  
+      await user.add_roles(role)
+        
+        
+@client.event
 async def on_message(message):
     await client.process_commands(message)
     if message.content.startswith("https://discord.gg/"):
