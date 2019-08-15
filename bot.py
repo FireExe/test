@@ -617,7 +617,7 @@ async def on_reaction_add(reaction,user):
       await user.remove_roles(role)
       await user.send("You will no longer receive giveaway pings")
     elif reaction.emoji == "❓":
-      role = discord.utils.get(server.roles, name="qotdpings")  
+      role = discord.utils.get(server.roles, name="qotdping")  
       await user.remove_roles(role)
       await user.send("You will no longer receive qotd pings")
         
@@ -639,7 +639,7 @@ async def on_reaction_remove(reaction,user):
       await user.add_roles(role)
       await user.send("You will now receive giveaway pings")
     elif reaction.emoji == "❓":
-      role = discord.utils.get(server.roles, name="qotdpings")  
+      role = discord.utils.get(server.roles, name="qotdping")  
       await user.add_roles(role)
       await user.send("You will now receive qotd pings")
         
