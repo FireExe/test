@@ -607,15 +607,19 @@ async def on_reaction_add(reaction,user):
     if reaction.emoji == "📥":
       role = discord.utils.get(server.roles, name="nopartnerpings")  
       await user.add_roles(role)
+      await user.send("You will no longer receive partner pings")
     elif reaction.emoji == "👀":
       role = discord.utils.get(server.roles, name="sneakping")  
-      await user.add_roles(role)
+      await user.remove_roles(role)
+      await user.send("You will no longer receive sneak peek pings")
     elif reaction.emoji == "🎁":
       role = discord.utils.get(server.roles, name="giveawayping")  
-      await user.add_roles(role)
+      await user.remove_roles(role)
+      await user.send("You will no longer receive giveaway pings")
     elif reaction.emoji == "❓":
       role = discord.utils.get(server.roles, name="qotdpings")  
-      await user.add_roles(role)
+      await user.remove_roles(role)
+      await user.send("You will no longer receive qotd pings")
         
 @client.event
 async def on_reaction_remove(reaction,user):
@@ -625,15 +629,19 @@ async def on_reaction_remove(reaction,user):
     if reaction.emoji == "📥":
       role = discord.utils.get(server.roles, name="nopartnerpings")  
       await user.remove_roles(role)
+      await user.send("You will now receive partner pings")
     elif reaction.emoji == "👀":
       role = discord.utils.get(server.roles, name="sneakping")  
-      await user.remove_roles(role)
+      await user.add_roles(role)
+      await user.send("You will now receive sneak peak pings")
     elif reaction.emoji == "🎁":
       role = discord.utils.get(server.roles, name="giveawayping")  
-      await user.remove_roles(role)
+      await user.add_roles(role)
+      await user.send("You will now receive giveaway pings")
     elif reaction.emoji == "❓":
       role = discord.utils.get(server.roles, name="qotdpings")  
-      await user.remove_roles(role)
+      await user.add_roles(role)
+      await user.send("You will now receive qotd pings")
         
 @client.event
 async def on_message(message):
