@@ -458,7 +458,7 @@ async def purge(ctx,amount : int = None):
     if amount == None:
      await incorrect(ctx,"/purge [amount]")
      return
-    await ctx.purge(limit=amount)
+    await ctx.channel.purge(limit=amount)
     message = await ctx.send(str(amount)+" messages were sucessfully deleted")
     await message.add_reaction("✅")
   else:
