@@ -11,7 +11,7 @@ lockdown = False
 giveawaymessage = "None"
 reason = ""
 Spam = []
-version =  "0.54"
+version =  "0.56"
 
 async def status_task():
     while True:
@@ -451,6 +451,18 @@ async def lockserver(ctx,res : str = None):
         await ctx.send("The server will be locked until this command is used again")
   else:
     await noperms(ctx,"lockserver")
+    
+@client.command(pass_content=True)
+async def purge(ctx,amount : int = None):
+  if ctx.message.author.guild_permissions.kick_members:  
+    if amount == None:
+     await incorrect(ctx,"/purge [amount]")
+     return
+    await ctx.purge(limit=amount)
+    message = await ctx.send(str(amount)+" messages were sucessfully deleted")
+    await message.add_reaction("✅")
+  else:
+    await noperms(ctx,"purge")
 
     
 @client.command(pass_content=True)
